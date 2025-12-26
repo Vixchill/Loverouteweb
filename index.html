@@ -48,7 +48,6 @@
         }
         .slogan { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.8; font-weight: 300; margin-bottom: 25px; }
         
-        /* MENU ĐIỀU HƯỚNG MỚI */
         .nav-menu { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
         .nav-link {
             color: var(--gold-color); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
@@ -85,7 +84,6 @@
         .features li { margin-bottom: 10px; display: flex; align-items: flex-start; }
         .features li::before { content: "✦"; color: var(--gold-color); margin-right: 10px; font-size: 1.2rem; }
         
-        /* BUTTONS */
         .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
         .btn {
             display: inline-block; padding: 12px 20px; background: transparent;
@@ -98,6 +96,21 @@
         .btn-cta:hover { background: var(--gold-color); color: #001F3F; box-shadow: 0 0 15px var(--gold-color); }
         
         footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.6; }
+
+        /* --- CALENDLY SECTION --- */
+        .calendar-section {
+            max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: center;
+        }
+        .calendar-title {
+            font-family: var(--font-serif); font-size: 1.5rem; color: var(--gold-color); 
+            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px;
+            display: inline-block; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px;
+        }
+        .calendly-container {
+            border: 1px solid var(--gold-color); border-radius: 15px; overflow: hidden;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            background: #fff; /* Calendly nền trắng nên cần container trắng hoặc trong suốt */
+        }
 
         /* --- MODAL (POPUP) --- */
         .modal {
@@ -118,12 +131,10 @@
         .modal-title { font-family: var(--font-serif); font-size: 2rem; color: var(--gold-color); margin-bottom: 5px; text-align: center;}
         .modal-subtitle { text-align: center; font-style: italic; opacity: 0.7; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
         
-        /* About Us Content Style */
         .about-text { font-family: var(--font-body); font-size: 1rem; line-height: 1.8; color: #e0e0e0; text-align: justify; margin-bottom: 20px; font-weight: 300; }
         .about-highlight { color: var(--gold-color); font-weight: 600; font-family: var(--font-serif); font-size: 1.2rem; margin-top: 30px; margin-bottom: 15px; display: block; border-left: 3px solid var(--gold-color); padding-left: 15px; }
         .signature { text-align: right; margin-top: 40px; font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--gold-color); }
 
-        /* Other Modal Styles */
         .modal-section { margin-bottom: 25px; }
         .modal-h3 { font-family: var(--font-serif); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-light); margin-bottom: 10px; display: flex; align-items: center; }
         .modal-h3 i { margin-right: 10px; }
@@ -178,6 +189,7 @@
         
         <nav class="nav-menu">
             <a onclick="openModal('modal-about')" class="nav-link">Về chúng tôi</a>
+            <a href="#booking-calendar" class="nav-link">Lịch xe trống</a>
             <a href="#" onclick="bookNow()" class="nav-link">Liên hệ</a>
         </nav>
     </header>
@@ -251,29 +263,34 @@
         </div>
     </div>
 
+    <section id="booking-calendar" class="calendar-section">
+        <h2 class="calendar-title">Kiểm tra lịch trống</h2>
+        
+        <div class="calendly-container">
+            <div class="calendly-inline-widget" data-url="https://calendly.com/trieungo201/t-v-n-d-t-l-ch-loveroutes" style="min-width:320px;height:630px;"></div>
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        </div>
+    </section>
+
     <div id="modal-about" class="modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal('modal-about')">&times;</button>
             <div class="modal-title">Về LoveRoute</div>
             <div class="modal-subtitle">"Hơn cả một hành trình, là một trải nghiệm cảm xúc"</div>
-
             <span class="about-highlight">01. Khởi nguồn</span>
             <p class="about-text">
                 Sài Gòn hoa lệ, nhưng đôi khi quá ồn ào để lắng nghe nhịp đập của trái tim. Ý tưởng về LoveRoute ra đời vào một buổi tối muộn, khi chúng tôi nhận ra rằng: <i>"Tại sao chúng ta dành hàng giờ chuẩn bị cho một buổi hẹn hoàn hảo, để rồi cảm xúc ấy lại vơi đi ít nhiều giữa khói bụi, tiếng còi xe và sự mệt mỏi khi cầm lái?"</i>
                 <br>Chúng tôi khao khát tạo ra một "khoảng lặng" di động, nơi các cặp đôi được tách biệt hoàn toàn với thế giới bên ngoài ngay khi cánh cửa đóng lại.
             </p>
-
             <span class="about-highlight">02. Triết lý "Không gian thứ 3"</span>
             <p class="about-text">
                 Không phải ở Nhà (Home), không phải ở Công sở (Work) hay Nhà hàng ồn ã. LoveRoute tạo ra một <b>Không gian thứ 3</b> – riêng tư tuyệt đối trên nền tảng dòng xe điện VF 6 vận hành tĩnh lặng. Chúng tôi tin rằng chiếc xe không chỉ là phương tiện đưa bạn từ điểm A đến điểm B, mà chính thời gian ngồi trên xe là lúc để nắm tay, để trò chuyện và để kết nối sâu sắc nhất.
             </p>
-
             <span class="about-highlight">03. Cam kết của "Người quản gia"</span>
             <p class="about-text">
                 Tại LoveRoute, chúng tôi không gọi nhân sự của mình là "Tài xế". Họ là những <b>Người quản gia (Chauffeur)</b> chuyên nghiệp.
                 <br>Chúng tôi cam kết mang đến trải nghiệm chuẩn 5 sao: Từ việc mở cửa xe, chuẩn bị nhiệt độ phù hợp, đến sự tinh tế trong việc chọn nhạc và tôn trọng sự riêng tư tuyệt đối của khách hàng. Mỗi chuyến đi là một tác phẩm nghệ thuật của sự phục vụ, nơi bạn là nhân vật chính.
             </p>
-
             <div class="signature">LoveRoute Team.</div>
         </div>
     </div>
