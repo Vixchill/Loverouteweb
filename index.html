@@ -8,8 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
-        /* --- CẤU HÌNH MÀU SẮC & FONT --- */
+        /* --- 1. CẤU HÌNH MÀU SẮC & FONT --- */
         :root {
             --bg-color: #001F3F; /* Xanh Midnight */
             --gold-color: #D4AF37; /* Vàng Champagne */
@@ -17,15 +18,12 @@
             --text-color: #FDFDFD;
             --card-bg: rgba(255, 255, 255, 0.05); /* Kính mờ */
             
-            --font-title: 'Cinzel', serif; /* Font Tiêu đề sang trọng */
-            --font-body: 'Montserrat', sans-serif; /* Font nội dung hiện đại */
+            --font-title: 'Cinzel', serif; 
+            --font-serif: 'Playfair Display', serif; 
+            --font-body: 'Montserrat', sans-serif;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-color);
@@ -33,24 +31,19 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             position: relative;
+            padding-bottom: 100px; /* Chừa chỗ cho thanh nhạc */
         }
 
-        /* --- HIỆU ỨNG NỀN ĐỘNG (STARRY NIGHT) --- */
+        /* --- 2. HIỆU ỨNG NỀN SAO BAY --- */
         #canvas-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             background: radial-gradient(circle at bottom, #0b2e59 0%, #001F3F 100%);
         }
 
-        /* --- HEADER --- */
-        header {
-            text-align: center;
-            padding: 40px 20px;
-        }
+        /* --- 3. HEADER & LOGO --- */
+        header { text-align: center; padding: 40px 20px 20px 20px; }
 
         .logo {
             font-family: var(--font-title);
@@ -62,37 +55,24 @@
         }
 
         .slogan {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            opacity: 0.8;
-            font-weight: 300;
+            font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 4px; opacity: 0.8; font-weight: 300;
         }
 
-        /* --- CONTAINER GÓI DỊCH VỤ --- */
+        /* --- 4. CÁC GÓI DỊCH VỤ (CARD) --- */
         .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            max-width: 1100px; margin: 0 auto; padding: 20px;
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
         }
 
-        /* --- THẺ GIÁ (CARD) --- */
         .card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px); /* Hiệu ứng kính mờ */
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 15px;
-            padding: 30px;
-            width: 320px;
+            border-radius: 15px; padding: 30px; width: 320px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
 
         .card:hover {
@@ -101,7 +81,6 @@
             border-color: var(--gold-color);
         }
 
-        /* Gói Gold nổi bật */
         .card.featured {
             border: 2px solid var(--gold-color);
             background: rgba(212, 175, 55, 0.1);
@@ -111,207 +90,94 @@
         }
 
         .badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--gold-color);
-            color: #000;
-            padding: 5px 15px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            border-radius: 20px;
-            text-transform: uppercase;
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--gold-color); color: #000;
+            padding: 5px 15px; font-size: 0.8rem; font-weight: bold;
+            border-radius: 20px; text-transform: uppercase;
         }
 
         .card h3 {
-            font-family: var(--font-title);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--gold-light);
+            font-family: var(--font-serif); font-size: 1.5rem;
+            margin-bottom: 10px; color: var(--gold-light); font-weight: 700;
         }
 
-        .price {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: #fff;
-        }
-
-        .duration {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
+        .price { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
+        .duration { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; font-style: italic; }
 
         .features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 30px;
-            font-size: 0.95rem;
-            line-height: 1.6;
+            list-style: none; text-align: left; margin-bottom: 30px;
+            font-size: 0.95rem; line-height: 1.6;
         }
 
-        .features li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: flex-start;
-        }
+        .features li { margin-bottom: 10px; display: flex; align-items: flex-start; }
+        .features li::before { content: "✦"; color: var(--gold-color); margin-right: 10px; font-size: 1.2rem; }
 
-        .features li::before {
-            content: "✦"; /* Dấu sao */
-            color: var(--gold-color);
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* --- NÚT BẤM (BUTTON) --- */
         .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: transparent;
-            color: var(--gold-color);
-            border: 1px solid var(--gold-color);
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            cursor: pointer;
+            display: inline-block; padding: 12px 30px;
+            background: transparent; color: var(--gold-color);
+            border: 1px solid var(--gold-color); border-radius: 30px;
+            text-decoration: none; font-weight: 600;
+            transition: all 0.3s ease; text-transform: uppercase;
+            font-size: 0.9rem; cursor: pointer;
         }
 
-        .card.featured .btn {
-            background: var(--gold-color);
-            color: #001F3F;
-        }
+        .card.featured .btn { background: var(--gold-color); color: #001F3F; }
+        .btn:hover { background: var(--gold-color); color: #001F3F; box-shadow: 0 0 15px var(--gold-color); }
 
-        .btn:hover {
-            background: var(--gold-color);
-            color: #001F3F;
-            box-shadow: 0 0 15px var(--gold-color);
-        }
+        footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.6; margin-top: 20px; }
 
-        /* --- FOOTER --- */
-        footer {
-            text-align: center;
-            padding: 40px;
-            font-size: 0.8rem;
-            opacity: 0.6;
-            margin-top: 20px;
-        }
-
-        /* --- MOBILE RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .card.featured {
-                transform: scale(1); /* Không phóng to trên mobile để khỏi vỡ khung */
-                order: -1; /* Đưa gói Gold lên đầu tiên trên điện thoại */
-                margin-bottom: 20px;
-            }
-            .logo { font-size: 2rem; }
-        }
-   /* --- MUSIC PLAYER (SPOTIFY STYLE) --- */
+        /* --- 5. MUSIC PLAYER (SPOTIFY STYLE) --- */
         .music-player {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 400px;
-            background: rgba(0, 31, 63, 0.85); /* Nền tối mờ */
-            backdrop-filter: blur(15px); /* Hiệu ứng kính */
-            border: 1px solid rgba(212, 175, 55, 0.5); /* Viền vàng */
-            border-radius: 50px; /* Bo tròn dạng viên thuốc */
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            z-index: 1000; /* Luôn nổi trên cùng */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: bottom 0.5s ease;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px;
+            background: rgba(0, 31, 63, 0.9); /* Nền tối đậm hơn chút */
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.6);
+            border-radius: 50px; padding: 10px 20px;
+            display: flex; align-items: center; gap: 15px;
+            z-index: 9999; /* Ưu tiên cao nhất */
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            transition: bottom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng nảy */
         }
 
-        /* Ẩn player khi chưa load xong */
-        .music-player.hidden {
-            bottom: -100px;
-        }
+        .music-player.hidden { bottom: -150px; }
 
-        /* Ảnh Album xoay tròn */
         .album-art {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-image: url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop'); /* Ảnh Jazz */
-            background-size: cover;
-            background-position: center;
+            width: 45px; height: 45px; border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=200&auto=format&fit=crop'); /* Ảnh bìa Micro */
+            background-size: cover; background-position: center;
             border: 2px solid var(--gold-color);
-            animation: spin 10s linear infinite;
-            animation-play-state: paused; /* Mặc định dừng */
+            animation: spin 8s linear infinite; animation-play-state: paused;
         }
-
-        .album-art.playing {
-            animation-play-state: running; /* Quay khi hát */
-        }
-
+        .album-art.playing { animation-play-state: running; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* Thông tin bài hát */
-        .track-info {
-            flex: 1;
-            overflow: hidden;
-        }
-
+        .track-info { flex: 1; overflow: hidden; }
         .track-name {
-            font-size: 0.9rem;
-            color: var(--gold-color);
-            font-weight: 600;
-            white-space: nowrap;
-            font-family: var(--font-body);
+            font-size: 0.9rem; color: var(--gold-color); font-weight: 600;
+            white-space: nowrap; font-family: var(--font-body);
         }
-
-        .track-artist {
-            font-size: 0.7rem;
-            color: #ccc;
-            margin-top: 2px;
-        }
-
-        /* Nút điều khiển */
-        .controls {
-            display: flex;
-            align-items: center;
-        }
+        .track-artist { font-size: 0.7rem; color: #ccc; margin-top: 2px; }
 
         #play-btn {
-            background: none;
-            border: none;
-            color: var(--gold-color);
-            font-size: 1.5rem;
-            cursor: pointer;
-            width: 30px;
-            display: flex;
-            justify-content: center;
+            background: none; border: none; color: var(--gold-color);
+            font-size: 1.8rem; cursor: pointer; width: 40px;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        /* Thanh tiến trình (Progress Bar nhỏ) */
         .progress-container {
-            position: absolute;
-            bottom: 0;
-            left: 20px;
-            right: 20px;
-            height: 3px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            overflow: hidden;
+            position: absolute; bottom: 0; left: 25px; right: 25px;
+            height: 3px; background: rgba(255,255,255,0.1);
+            border-radius: 10px; overflow: hidden;
         }
+        #progress-bar { width: 0%; height: 100%; background: var(--gold-color); transition: width 0.1s linear; }
 
-        #progress-bar {
-            width: 0%;
-            height: 100%;
-            background: var(--gold-color);
-            transition: width 0.1s linear;
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .card.featured { transform: scale(1); order: -1; margin-bottom: 20px; }
+            .logo { font-size: 2rem; }
+            .music-player { width: 95%; bottom: 15px; }
         }
-    
     </style>
 </head>
 <body>
@@ -322,23 +188,20 @@
         <div class="logo">LoveRoute</div>
         <div class="slogan">Private Date Chauffeur</div>
     </header>
-<section style="max-width: 800px; margin: 0 auto 50px auto; padding: 0 25px; text-align: center; position: relative; z-index: 2;">
-        
+
+    <section style="max-width: 800px; margin: 0 auto 50px auto; padding: 0 25px; text-align: center; position: relative; z-index: 2;">
         <h2 style="font-family: 'Montserrat', sans-serif; color: var(--gold-color); font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 30px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); display: inline-block; padding-bottom: 10px;">
             Brand Story
         </h2>
-
         <div style="font-family: 'Playfair Display', serif; font-size: 1.1rem; line-height: 1.8; color: #e0e0e0; font-style: italic;">
             “Sài Gòn náo nhiệt, nhưng đôi khi lại thiếu đi những khoảng lặng dành cho hai người. Chúng ta thường mất hàng giờ chuẩn bị cho một buổi hẹn, để rồi sự háo hức ấy vơi đi ít nhiều giữa tiếng còi xe, khói bụi và những lo toan vụn vặt.
             <br><br>
             LoveRoute ra đời để thay đổi điều đó. Không đơn thuần là một chuyến xe, chúng tôi muốn trở thành người 'quản gia' cho cảm xúc của bạn. Với dòng xe điện VF 6 vận hành êm ái tuyệt đối, LoveRoute tách biệt bạn khỏi sự xô bồ ngay khi cánh cửa đóng lại. Ở đây không có tiếng ồn. Chỉ có hương thơm tinh tế, âm nhạc riêng tư và khoảnh khắc trọn vẹn bên người quan trọng nhất.”
         </div>
-        
         <div style="color: var(--gold-color); font-size: 1.5rem; margin-top: 25px; opacity: 0.8;">✦</div>
-
     </section>
+
     <div class="container">
-        
         <div class="card">
             <h3>Chill Drive</h3>
             <div class="price">699.000đ</div>
@@ -350,7 +213,7 @@
                 <li>Tùy chọn nhạc theo yêu cầu</li>
                 <li>Lộ trình ngắm cảnh đẹp nhất</li>
             </ul>
-            <a href="#" onclick="bookNow('Gói Chill Drive')" class="btn">Đặt Ngay</a>
+            <a href="#" onclick="bookNow()" class="btn">Đặt Ngay</a>
         </div>
 
         <div class="card featured">
@@ -366,145 +229,38 @@
                 <li>Gối tựa lưng & Chăn êm ái</li>
                 <li>Hỗ trợ chụp ảnh kỷ niệm</li>
             </ul>
-            <a href="#" onclick="bookNow('Gói Dinner Date')" class="btn">Đặt Ngay</a>
+            <a href="#" onclick="bookNow()" class="btn">Đặt Ngay</a>
         </div>
 
         <div class="card">
             <h3>The Special</h3>
-            <div class="price">2.890.000đ</div>
+            <div class="price">2.490.000đ</div>
             <div class="duration">6 Tiếng • Kỷ niệm & Cầu hôn</div>
             <ul class="features">
                 <li><strong>Trọn gói dịch vụ VIP</strong></li>
                 <li>Trang trí xe hoa/đèn LED (Cốp sau)</li>
                 <li>Tặng 01 chai nước trái cây lên men</li>
-                <li>Private Fine dining</li>
-                <li>Lên plan date A-Z</li>
+                <li>Hỗ trợ lên kế hoạch bất ngờ (A-Z)</li>
                 <li>Chụp ảnh & Quay video chuyên nghiệp</li>
                 <li>Thời gian linh hoạt thoải mái</li>
             </ul>
-            <a href="#" onclick="bookNow('Gói The Special')" class="btn">Tư vấn ngay</a>
+            <a href="#" onclick="bookNow()" class="btn">Tư vấn ngay</a>
         </div>
-
     </div>
 
     <footer>
         <p>© 2024 LoveRoute Saigon. All rights reserved.</p>
-        <p>Hotline/Zalo: 090.xxx.xxxx</p>
     </footer>
 
-    <script>
-        // 1. CẤU HÌNH SỐ ĐIỆN THOẠI ZALO CỦA BẠN TẠI ĐÂY
-        const ZALO_NUMBER = "0869120021"; // Thay số của bạn vào đây (bỏ số 0 đầu nếu cần, tùy format zalo link)
-        
-        function bookNow(packageName) {
-            // Tạo link Zalo với tin nhắn mẫu
-            const message = `Chào LoveRoute, mình muốn đặt ${packageName}, tư vấn giúp mình nhé!`;
-            // Cách 1: Link Zalo Web (Khuyên dùng)
-            const url = `https://zalo.me/${ZALO_NUMBER}?text=${encodeURIComponent(message)}`;
-            
-            // Mở tab mới
-            window.open(url, '_blank');
-        }
-
-        // 2. HIỆU ỨNG NỀN SAO BAY (CANVAS ANIMATION)
-        const canvas = document.getElementById('canvas-bg');
-        const ctx = canvas.getContext('2d');
-        let width, height, stars = [];
-
-        function init() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            stars = [];
-            // Tạo 100 ngôi sao
-            for (let i = 0; i < 100; i++) {
-                stars.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 1.5,
-                    vx: (Math.random() - 0.5) * 0.5, // Tốc độ di chuyển chậm
-                    vy: (Math.random() - 0.5) * 0.5
-                });
-            }
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = "#F3E5AB"; // Màu sao vàng nhạt
-            
-            stars.forEach(star => {
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Di chuyển sao
-                star.x += star.vx;
-                star.y += star.vy;
-
-                // Nếu sao đi ra khỏi màn hình thì cho quay lại
-                if (star.x < 0) star.x = width;
-                if (star.x > width) star.x = 0;
-                if (star.y < 0) star.y = height;
-                if (star.y > height) star.y = 0;
-            });
-            
-            requestAnimationFrame(draw);
-        }
-
-        window.addEventListener('resize', init);
-        init();
-        draw();
-   // --- XỬ LÝ MUSIC PLAYER ---
-        const player = document.getElementById('music-player');
-        const audio = document.getElementById('audio-source');
-        const playBtn = document.getElementById('play-btn');
-        const albumArt = document.getElementById('album-art');
-        const progressBar = document.getElementById('progress-bar');
-
-        // Hiện player sau 1 giây (hiệu ứng trượt lên)
-        setTimeout(() => {
-            player.classList.remove('hidden');
-        }, 1000);
-
-        // Nút Play/Pause
-        playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                playBtn.innerHTML = "❚❚"; // Đổi thành icon Pause
-                albumArt.classList.add('playing'); // Quay đĩa
-            } else {
-                audio.pause();
-                playBtn.innerHTML = "▶"; // Đổi về icon Play
-                albumArt.classList.remove('playing'); // Dừng quay
-            }
-        });
-
-        // Cập nhật thanh nhạc
-        audio.addEventListener('timeupdate', () => {
-            const percent = (audio.currentTime / audio.duration) * 100;
-            progressBar.style.width = `${percent}%`;
-        });
-
-        // Khi hết bài thì tự reset
-        audio.addEventListener('ended', () => {
-            playBtn.innerHTML = "▶";
-            albumArt.classList.remove('playing');
-            progressBar.style.width = "0%";
-        });
-    
-    </script>
-<div class="music-player hidden" id="music-player">
+    <div class="music-player hidden" id="music-player">
         <div class="album-art" id="album-art"></div>
-        
         <div class="track-info">
             <div class="track-name">LoveRoute Jazz Lounge</div>
             <div class="track-artist">Relaxing Vibes</div>
         </div>
-
         <div class="controls">
-            <button id="play-btn">▶</button> </div>
-
+            <button id="play-btn">▶</button>
+        </div>
         <div class="progress-container">
             <div id="progress-bar"></div>
         </div>
@@ -512,5 +268,89 @@
 
     <audio id="audio-source" src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8a73467.mp3?filename=jazz-abstract-110966.mp3"></audio>
 
+    <script>
+        // --- 1. CẤU HÌNH ZALO ---
+        const ZALO_NUMBER = "84901234567"; // Thay số của bạn vào đây
+        
+        function bookNow() {
+            const url = `https://zalo.me/${ZALO_NUMBER}`;
+            window.open(url, '_blank');
+        }
+
+        // --- 2. HIỆU ỨNG NỀN SAO BAY ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let width, height, stars = [];
+
+        function initStars() {
+            width = window.innerWidth; height = window.innerHeight;
+            canvas.width = width; canvas.height = height;
+            stars = [];
+            for (let i = 0; i < 100; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.5,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
+            }
+        }
+        function drawStars() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "#F3E5AB";
+            stars.forEach(star => {
+                ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2); ctx.fill();
+                star.x += star.vx; star.y += star.vy;
+                if (star.x < 0) star.x = width; if (star.x > width) star.x = 0;
+                if (star.y < 0) star.y = height; if (star.y > height) star.y = 0;
+            });
+            requestAnimationFrame(drawStars);
+        }
+        window.addEventListener('resize', initStars);
+        initStars(); drawStars();
+
+        // --- 3. XỬ LÝ MUSIC PLAYER ---
+        const player = document.getElementById('music-player');
+        const audio = document.getElementById('audio-source');
+        const playBtn = document.getElementById('play-btn');
+        const albumArt = document.getElementById('album-art');
+        const progressBar = document.getElementById('progress-bar');
+
+        // Hiện player sau 1 giây (hiệu ứng trượt lên)
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                player.classList.remove('hidden');
+            }, 1000);
+        });
+
+        // Nút Play/Pause
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = "❚❚"; 
+                albumArt.classList.add('playing'); 
+            } else {
+                audio.pause();
+                playBtn.innerHTML = "▶"; 
+                albumArt.classList.remove('playing'); 
+            }
+        });
+
+        // Cập nhật thanh nhạc
+        audio.addEventListener('timeupdate', () => {
+            if(audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = `${percent}%`;
+            }
+        });
+
+        // Khi hết bài
+        audio.addEventListener('ended', () => {
+            playBtn.innerHTML = "▶";
+            albumArt.classList.remove('playing');
+            progressBar.style.width = "0%";
+        });
+    </script>
 </body>
 </html>
