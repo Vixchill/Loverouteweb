@@ -10,14 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. CẤU HÌNH MÀU SẮC & FONT --- */
+        /* --- 1. CẤU HÌNH GIAO DIỆN --- */
         :root {
             --bg-color: #001F3F; /* Xanh Midnight */
             --gold-color: #D4AF37; /* Vàng Champagne */
             --gold-light: #F3E5AB;
             --text-color: #FDFDFD;
-            --card-bg: rgba(255, 255, 255, 0.05); /* Kính mờ */
-            
+            --card-bg: rgba(255, 255, 255, 0.05);
             --font-title: 'Cinzel', serif; 
             --font-serif: 'Playfair Display', serif; 
             --font-body: 'Montserrat', sans-serif;
@@ -31,139 +30,89 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             position: relative;
-            padding-bottom: 100px; /* Chừa chỗ cho thanh nhạc */
+            padding-bottom: 120px; /* Chừa chỗ cho thanh nhạc */
         }
 
-        /* --- 2. HIỆU ỨNG NỀN SAO BAY --- */
         #canvas-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at bottom, #0b2e59 0%, #001F3F 100%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background: radial-gradient(circle at bottom, #0b2e59 0%, #001F3F 100%);
         }
 
-        /* --- 3. HEADER & LOGO --- */
         header { text-align: center; padding: 40px 20px 20px 20px; }
-
         .logo {
-            font-family: var(--font-title);
-            font-size: 2.5rem;
-            color: var(--gold-color);
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            font-family: var(--font-title); font-size: 2.5rem; color: var(--gold-color);
+            letter-spacing: 2px; margin-bottom: 5px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
+        .slogan { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.8; font-weight: 300; }
 
-        .slogan {
-            font-size: 0.9rem; text-transform: uppercase;
-            letter-spacing: 4px; opacity: 0.8; font-weight: 300;
-        }
-
-        /* --- 4. CÁC GÓI DỊCH VỤ (CARD) --- */
         .container {
             max-width: 1100px; margin: 0 auto; padding: 20px;
             display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
         }
 
         .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 15px; padding: 30px; width: 320px;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex; flex-direction: column; justify-content: space-between;
+            background: var(--card-bg); backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 15px;
+            padding: 30px; width: 320px; text-align: center;
+            transition: transform 0.3s ease; display: flex; flex-direction: column; justify-content: space-between;
         }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border-color: var(--gold-color);
-        }
-
+        .card:hover { transform: translateY(-10px); border-color: var(--gold-color); }
         .card.featured {
-            border: 2px solid var(--gold-color);
-            background: rgba(212, 175, 55, 0.1);
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-            position: relative;
+            border: 2px solid var(--gold-color); background: rgba(212, 175, 55, 0.1);
+            transform: scale(1.05); position: relative;
         }
-
         .badge {
             position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            background: var(--gold-color); color: #000;
-            padding: 5px 15px; font-size: 0.8rem; font-weight: bold;
-            border-radius: 20px; text-transform: uppercase;
+            background: var(--gold-color); color: #000; padding: 5px 15px;
+            font-size: 0.8rem; font-weight: bold; border-radius: 20px; text-transform: uppercase;
         }
-
-        .card h3 {
-            font-family: var(--font-serif); font-size: 1.5rem;
-            margin-bottom: 10px; color: var(--gold-light); font-weight: 700;
-        }
-
+        .card h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 10px; color: var(--gold-light); font-weight: 700; }
         .price { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
         .duration { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; font-style: italic; }
-
-        .features {
-            list-style: none; text-align: left; margin-bottom: 30px;
-            font-size: 0.95rem; line-height: 1.6;
-        }
-
+        .features { list-style: none; text-align: left; margin-bottom: 30px; font-size: 0.95rem; line-height: 1.6; }
         .features li { margin-bottom: 10px; display: flex; align-items: flex-start; }
         .features li::before { content: "✦"; color: var(--gold-color); margin-right: 10px; font-size: 1.2rem; }
-
+        
         .btn {
-            display: inline-block; padding: 12px 30px;
-            background: transparent; color: var(--gold-color);
-            border: 1px solid var(--gold-color); border-radius: 30px;
-            text-decoration: none; font-weight: 600;
-            transition: all 0.3s ease; text-transform: uppercase;
-            font-size: 0.9rem; cursor: pointer;
+            display: inline-block; padding: 12px 30px; background: transparent;
+            color: var(--gold-color); border: 1px solid var(--gold-color); border-radius: 30px;
+            text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; cursor: pointer;
         }
-
         .card.featured .btn { background: var(--gold-color); color: #001F3F; }
-        .btn:hover { background: var(--gold-color); color: #001F3F; box-shadow: 0 0 15px var(--gold-color); }
+        
+        footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.6; }
 
-        footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.6; margin-top: 20px; }
-
-        /* --- 5. MUSIC PLAYER (SPOTIFY STYLE) --- */
+        /* --- MUSIC PLAYER STYLE (CÓ NÚT NEXT) --- */
         .music-player {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px;
-            background: rgba(0, 31, 63, 0.9); /* Nền tối đậm hơn chút */
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.6);
-            border-radius: 50px; padding: 10px 20px;
-            display: flex; align-items: center; gap: 15px;
-            z-index: 9999; /* Ưu tiên cao nhất */
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-            transition: bottom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng nảy */
+            width: 90%; max-width: 420px;
+            background: rgba(0, 31, 63, 0.95); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.6); border-radius: 50px;
+            padding: 10px 20px; display: flex; align-items: center; gap: 10px;
+            z-index: 9999; box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            transition: bottom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         .music-player.hidden { bottom: -150px; }
-
+        
         .album-art {
             width: 45px; height: 45px; border-radius: 50%;
-            background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=200&auto=format&fit=crop'); /* Ảnh bìa Micro */
+            background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=200&auto=format&fit=crop');
             background-size: cover; background-position: center;
             border: 2px solid var(--gold-color);
             animation: spin 8s linear infinite; animation-play-state: paused;
+            flex-shrink: 0;
         }
         .album-art.playing { animation-play-state: running; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        .track-info { flex: 1; overflow: hidden; }
-        .track-name {
-            font-size: 0.9rem; color: var(--gold-color); font-weight: 600;
-            white-space: nowrap; font-family: var(--font-body);
-        }
+        .track-info { flex: 1; overflow: hidden; margin-left: 5px; }
+        .track-name { font-size: 0.9rem; color: var(--gold-color); font-weight: 600; white-space: nowrap; font-family: var(--font-body); }
         .track-artist { font-size: 0.7rem; color: #ccc; margin-top: 2px; }
 
-        #play-btn {
-            background: none; border: none; color: var(--gold-color);
-            font-size: 1.8rem; cursor: pointer; width: 40px;
-            display: flex; justify-content: center; align-items: center;
-        }
+        .controls { display: flex; align-items: center; gap: 5px; }
+        .ctrl-btn { background: none; border: none; color: var(--gold-color); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        #play-btn { font-size: 1.6rem; width: 35px; }
+        #next-btn, #prev-btn { font-size: 1.2rem; opacity: 0.8; padding: 5px; }
 
         .progress-container {
             position: absolute; bottom: 0; left: 25px; right: 25px;
@@ -172,12 +121,7 @@
         }
         #progress-bar { width: 0%; height: 100%; background: var(--gold-color); transition: width 0.1s linear; }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .card.featured { transform: scale(1); order: -1; margin-bottom: 20px; }
-            .logo { font-size: 2rem; }
-            .music-player { width: 95%; bottom: 15px; }
-        }
+        @media (max-width: 768px) { .card.featured { transform: scale(1); order: -1; margin-bottom: 20px; } }
     </style>
 </head>
 <body>
@@ -248,108 +192,111 @@
         </div>
     </div>
 
-    <footer>
-        <p>© 2024 LoveRoute Saigon. All rights reserved.</p>
-    </footer>
+    <footer><p>© 2024 LoveRoute Saigon. All rights reserved.</p></footer>
 
     <div class="music-player hidden" id="music-player">
         <div class="album-art" id="album-art"></div>
         <div class="track-info">
-            <div class="track-name">LoveRoute Jazz Lounge</div>
-            <div class="track-artist">Relaxing Vibes</div>
+            <div class="track-name" id="track-name">LoveRoute Playlist</div>
+            <div class="track-artist" id="track-artist">Đang tải...</div>
         </div>
         <div class="controls">
-            <button id="play-btn">▶</button>
+            <button id="prev-btn" class="ctrl-btn">⏮</button>
+            <button id="play-btn" class="ctrl-btn">▶</button>
+            <button id="next-btn" class="ctrl-btn">⏭</button>
         </div>
-        <div class="progress-container">
-            <div id="progress-bar"></div>
-        </div>
+        <div class="progress-container"><div id="progress-bar"></div></div>
     </div>
 
-    <audio id="audio-source" src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8a73467.mp3?filename=jazz-abstract-110966.mp3"></audio>
+    <audio id="audio-source"></audio>
 
     <script>
-        // --- 1. CẤU HÌNH ZALO ---
-        const ZALO_NUMBER = "84901234567"; // Thay số của bạn vào đây
-        
-        function bookNow() {
-            const url = `https://zalo.me/${ZALO_NUMBER}`;
-            window.open(url, '_blank');
-        }
+        // 1. ZALO BOOKING
+        const ZALO_NUMBER = "84869120021"; // Thay số của bạn
+        function bookNow() { window.open(`https://zalo.me/${ZALO_NUMBER}`, '_blank'); }
 
-        // --- 2. HIỆU ỨNG NỀN SAO BAY ---
+        // 2. BACKGROUND SAO BAY
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let width, height, stars = [];
-
         function initStars() {
             width = window.innerWidth; height = window.innerHeight;
-            canvas.width = width; canvas.height = height;
-            stars = [];
+            canvas.width = width; canvas.height = height; stars = [];
             for (let i = 0; i < 100; i++) {
-                stars.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    radius: Math.random() * 1.5,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5
-                });
+                stars.push({x: Math.random()*width, y: Math.random()*height, radius: Math.random()*1.5, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5});
             }
         }
         function drawStars() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = "#F3E5AB";
+            ctx.clearRect(0, 0, width, height); ctx.fillStyle = "#F3E5AB";
             stars.forEach(star => {
-                ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2); ctx.fill();
+                ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, Math.PI*2); ctx.fill();
                 star.x += star.vx; star.y += star.vy;
-                if (star.x < 0) star.x = width; if (star.x > width) star.x = 0;
-                if (star.y < 0) star.y = height; if (star.y > height) star.y = 0;
+                if(star.x<0) star.x=width; if(star.x>width) star.x=0; if(star.y<0) star.y=height; if(star.y>height) star.y=0;
             });
             requestAnimationFrame(drawStars);
         }
-        window.addEventListener('resize', initStars);
-        initStars(); drawStars();
+        window.addEventListener('resize', initStars); initStars(); drawStars();
 
-        // --- 3. XỬ LÝ MUSIC PLAYER ---
+        // 3. PLAYLIST NHẠC THÔNG MINH
+        // LƯU Ý: Tên file phải khớp 100% với file bạn đã upload lên GitHub
+        const playlist = [
+            { file: 'bai1.mp3', name: 'Vạn vật như muốn ta bên nhau', artist: 'Rio ft. 52Hz' },
+            // Bài 2 tôi tạm tắt vì trong ảnh bạn chưa up, nếu up rồi thì bỏ dấu // ở đầu dòng dưới đi
+            // { file: 'bai2.mp3', name: 'Hơn Cả Yêu', artist: 'Đức Phúc' },
+            { file: 'bai3.mp3', name: 'Âm thầm bên em', artist: 'Sơn Tùng MTP' },
+            { file: 'bai4.mp3', name: 'Người đầu tiên', artist: 'Juky San, buitruonglinh' },
+            { file: 'bai5.mp3', name: 'ĐỢI', artist: '52Hz' }
+        ];
+
+        let currentSongIndex = 0;
         const player = document.getElementById('music-player');
         const audio = document.getElementById('audio-source');
         const playBtn = document.getElementById('play-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
         const albumArt = document.getElementById('album-art');
+        const trackNameEl = document.getElementById('track-name');
+        const trackArtistEl = document.getElementById('track-artist');
         const progressBar = document.getElementById('progress-bar');
 
-        // Hiện player sau 1 giây (hiệu ứng trượt lên)
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                player.classList.remove('hidden');
-            }, 1000);
-        });
+        function loadSong(song) {
+            trackNameEl.innerText = song.name;
+            trackArtistEl.innerText = song.artist;
+            audio.src = song.file;
+        }
+        function playSong() {
+            audio.play(); playBtn.innerText = "❚❚"; albumArt.classList.add('playing');
+        }
+        function pauseSong() {
+            audio.pause(); playBtn.innerText = "▶"; albumArt.classList.remove('playing');
+        }
+        function nextSong() {
+            currentSongIndex++;
+            if (currentSongIndex > playlist.length - 1) currentSongIndex = 0;
+            loadSong(playlist[currentSongIndex]); playSong();
+        }
+        function prevSong() {
+            currentSongIndex--;
+            if (currentSongIndex < 0) currentSongIndex = playlist.length - 1;
+            loadSong(playlist[currentSongIndex]); playSong();
+        }
 
-        // Nút Play/Pause
+        // KHỞI TẠO
+        if(playlist.length > 0) {
+            loadSong(playlist[0]);
+        }
+
+        window.addEventListener('load', () => { setTimeout(() => { player.classList.remove('hidden'); }, 1000); });
+        
         playBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                playBtn.innerHTML = "❚❚"; 
-                albumArt.classList.add('playing'); 
-            } else {
-                audio.pause();
-                playBtn.innerHTML = "▶"; 
-                albumArt.classList.remove('playing'); 
-            }
+            const isPlaying = playBtn.innerText === "❚❚";
+            if (isPlaying) pauseSong(); else playSong();
         });
-
-        // Cập nhật thanh nhạc
+        nextBtn.addEventListener('click', nextSong);
+        prevBtn.addEventListener('click', prevSong);
+        audio.addEventListener('ended', nextSong);
         audio.addEventListener('timeupdate', () => {
-            if(audio.duration) {
-                const percent = (audio.currentTime / audio.duration) * 100;
-                progressBar.style.width = `${percent}%`;
-            }
-        });
-
-        // Khi hết bài
-        audio.addEventListener('ended', () => {
-            playBtn.innerHTML = "▶";
-            albumArt.classList.remove('playing');
-            progressBar.style.width = "0%";
+            if(audio.duration) progressBar.style.width = `${(audio.currentTime/audio.duration)*100}%`;
         });
     </script>
 </body>
