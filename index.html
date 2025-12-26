@@ -31,7 +31,7 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             position: relative;
-            padding-bottom: 130px; /* Chừa chỗ rộng hơn cho player mới */
+            padding-bottom: 130px;
         }
 
         #canvas-bg {
@@ -39,6 +39,7 @@
             z-index: -1; background: radial-gradient(circle at bottom, #0b2e59 0%, #001F3F 100%);
         }
 
+        /* HEADER */
         header { text-align: center; padding: 40px 20px 20px 20px; }
         .logo {
             font-family: var(--font-title); font-size: 2.5rem; color: var(--gold-color);
@@ -46,6 +47,7 @@
         }
         .slogan { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.8; font-weight: 300; }
 
+        /* CARDS */
         .container {
             max-width: 1100px; margin: 0 auto; padding: 20px;
             display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
@@ -70,79 +72,83 @@
         .card h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 10px; color: var(--gold-light); font-weight: 700; }
         .price { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
         .duration { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; font-style: italic; }
-        .features { list-style: none; text-align: left; margin-bottom: 30px; font-size: 0.95rem; line-height: 1.6; }
+        .features { list-style: none; text-align: left; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.6; }
         .features li { margin-bottom: 10px; display: flex; align-items: flex-start; }
         .features li::before { content: "✦"; color: var(--gold-color); margin-right: 10px; font-size: 1.2rem; }
         
+        /* BUTTONS */
+        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
         .btn {
-            display: inline-block; padding: 12px 30px; background: transparent;
+            display: inline-block; padding: 12px 20px; background: transparent;
             color: var(--gold-color); border: 1px solid var(--gold-color); border-radius: 30px;
-            text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; cursor: pointer;
+            text-decoration: none; font-weight: 600; text-transform: uppercase; font-size: 0.9rem; cursor: pointer; transition: all 0.3s ease;
         }
-        .card.featured .btn { background: var(--gold-color); color: #001F3F; }
+        .btn-detail { font-size: 0.8rem; border: none; opacity: 0.8; text-decoration: underline; text-underline-offset: 4px; }
+        .btn-detail:hover { opacity: 1; letter-spacing: 1px; }
+        .card.featured .btn-cta { background: var(--gold-color); color: #001F3F; }
+        .btn-cta:hover { background: var(--gold-color); color: #001F3F; box-shadow: 0 0 15px var(--gold-color); }
         
         footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.6; }
 
-        /* --- MUSIC PLAYER NEW STYLE (SPOTIFY LOOK) --- */
+        /* --- MODAL (POPUP CHI TIẾT) --- */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 31, 63, 0.9); z-index: 10000; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal.show { display: flex; opacity: 1; }
+        .modal-content {
+            background: #0B1026; border: 1px solid var(--gold-color);
+            width: 90%; max-width: 600px; max-height: 85vh; border-radius: 15px; padding: 30px; position: relative;
+            overflow-y: auto; box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            transform: translateY(20px); transition: transform 0.3s ease;
+        }
+        .modal.show .modal-content { transform: translateY(0); }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #fff; cursor: pointer; background: none; border: none; }
+        .close-btn:hover { color: var(--gold-color); }
+
+        .modal-title { font-family: var(--font-serif); font-size: 1.8rem; color: var(--gold-color); margin-bottom: 5px; text-align: center;}
+        .modal-subtitle { text-align: center; font-style: italic; opacity: 0.7; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        .modal-section { margin-bottom: 25px; }
+        .modal-h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-light); margin-bottom: 10px; display: flex; align-items: center; }
+        .modal-h3 i { margin-right: 10px; }
+        .modal-text { font-size: 0.95rem; line-height: 1.6; color: #ddd; font-weight: 300; text-align: justify; }
+        .timeline-item { display: flex; gap: 15px; margin-bottom: 10px; }
+        .time { font-weight: bold; color: var(--gold-color); min-width: 60px; }
+        .activity { color: #eee; }
+
+        /* --- MUSIC PLAYER --- */
         .music-player {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 95%; max-width: 450px; /* Rộng hơn xíu */
+            width: 95%; max-width: 450px;
             background: rgba(0, 31, 63, 0.95); backdrop-filter: blur(20px);
             border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 50px;
             padding: 12px 25px; display: flex; align-items: center; gap: 15px;
             z-index: 9999; box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-            transition: bottom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .music-player.hidden { bottom: -150px; }
-        
         .album-art {
-            width: 50px; height: 50px; border-radius: 50%; /* Ảnh to hơn chút */
+            width: 50px; height: 50px; border-radius: 50%;
             background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=200&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-            border: 2px solid var(--gold-color);
+            background-size: cover; border: 2px solid var(--gold-color); flex-shrink: 0;
             animation: spin 8s linear infinite; animation-play-state: paused;
-            flex-shrink: 0;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
         .album-art.playing { animation-play-state: running; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-
         .track-info { flex: 1; overflow: hidden; }
         .track-name { font-size: 1rem; color: var(--gold-color); font-weight: 700; white-space: nowrap; font-family: var(--font-body); }
         .track-artist { font-size: 0.75rem; color: #ccc; margin-top: 3px; }
-
-        /* STYLE CÁC NÚT BẤM MỚI */
         .controls { display: flex; align-items: center; gap: 15px; }
-        .ctrl-btn { background: none; border: none; color: var(--gold-color); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-        
-        /* Nút phụ (Next, Back, Shuffle...) */
+        .ctrl-btn { background: none; border: none; color: var(--gold-color); cursor: pointer; transition: all 0.2s; }
         .side-btn { font-size: 1.3rem; opacity: 0.7; }
-        .side-btn:hover { opacity: 1; transform: scale(1.1); }
-
-        /* Nút Play chính giữa (Hình tròn nổi bật) */
-        #play-btn {
-            font-size: 1.6rem;
-            width: 50px; height: 50px;
-            background: var(--gold-color); /* Nền vàng */
-            color: #001F3F; /* Icon màu tối */
-            border-radius: 50%; /* Bo tròn */
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
-        }
-        #play-btn:hover { transform: scale(1.1); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.7); }
-        #play-btn i { margin-left: 2px; /* Căn chỉnh icon play cho giữa */ }
-        #play-btn i.fa-pause { margin-left: 0; }
-
-        .progress-container {
-            position: absolute; bottom: 0; left: 30px; right: 30px;
-            height: 4px; background: rgba(255,255,255,0.1);
-            border-radius: 10px; overflow: hidden;
-        }
+        #play-btn { width: 50px; height: 50px; background: var(--gold-color); color: #001F3F; border-radius: 50%; font-size: 1.6rem; display: flex; justify-content: center; align-items: center;}
+        .progress-container { position: absolute; bottom: 0; left: 30px; right: 30px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
         #progress-bar { width: 0%; height: 100%; background: var(--gold-color); transition: width 0.1s linear; }
 
         @media (max-width: 768px) { 
             .card.featured { transform: scale(1); order: -1; margin-bottom: 20px; }
-            .track-info { display: none; } /* Ẩn tên bài trên mobile để gọn */
-            .music-player { justify-content: center; padding: 15px; }
+            .track-info { display: none; }
+            .modal-content { width: 95%; padding: 20px; }
         }
     </style>
 </head>
@@ -169,81 +175,177 @@
 
     <div class="container">
         <div class="card">
-            <h3>Chill Drive</h3>
-            <div class="price">699.000đ</div>
-            <div class="duration">2.5 Tiếng • Dạo phố</div>
-            <ul class="features">
-                <li>Xe VF 6 riêng tư & Tĩnh lặng</li>
-                <li>Nước suối cao cấp & Khăn lạnh</li>
-                <li>Tài xế lịch thiệp (Vest)</li>
-                <li>Tùy chọn nhạc theo yêu cầu</li>
-                <li>Lộ trình ngắm cảnh đẹp nhất</li>
-            </ul>
-            <a href="#" onclick="bookNow()" class="btn">Đặt Ngay</a>
+            <div>
+                <h3>Chill Drive</h3>
+                <div class="price">699.000đ</div>
+                <div class="duration">2.5 Tiếng • Dạo phố</div>
+                <ul class="features">
+                    <li>Xe VF 6 riêng tư & Tĩnh lặng</li>
+                    <li>Nước suối cao cấp & Khăn lạnh</li>
+                    <li>Tài xế lịch thiệp (Vest)</li>
+                    <li>Tùy chọn nhạc theo yêu cầu</li>
+                    <li>Lộ trình ngắm cảnh đẹp nhất</li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button onclick="openModal('modal-chill')" class="btn btn-detail">Xem chi tiết & Lịch trình</button>
+                <a href="#" onclick="bookNow('Chill Drive')" class="btn btn-cta">Đặt Ngay</a>
+            </div>
         </div>
 
         <div class="card featured">
             <div class="badge">Phổ biến nhất</div>
-            <h3>Dinner Date</h3>
-            <div class="price">1.290.000đ</div>
-            <div class="duration">4 Tiếng • Ăn tối & Hóng gió</div>
-            <ul class="features">
-                <li><strong>Tất cả quyền lợi gói Chill</strong></li>
-                <li>Chờ đợi miễn phí khi ăn tối</li>
-                <li>Đưa đón tận cửa nhà hàng</li>
-                <li>Snack nhẹ & Kẹo Chocolate</li>
-                <li>Gối tựa lưng & Chăn êm ái</li>
-                <li>Hỗ trợ chụp ảnh kỷ niệm</li>
-            </ul>
-            <a href="#" onclick="bookNow()" class="btn">Đặt Ngay</a>
+            <div>
+                <h3>Dinner Date</h3>
+                <div class="price">1.290.000đ</div>
+                <div class="duration">4 Tiếng • Ăn tối & Hóng gió</div>
+                <ul class="features">
+                    <li><strong>Tất cả quyền lợi gói Chill</strong></li>
+                    <li>Chờ đợi miễn phí khi ăn tối</li>
+                    <li>Đưa đón tận cửa nhà hàng</li>
+                    <li>Snack nhẹ & Kẹo Chocolate</li>
+                    <li>Gối tựa lưng & Chăn êm ái</li>
+                    <li>Hỗ trợ chụp ảnh kỷ niệm</li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button onclick="openModal('modal-dinner')" class="btn btn-detail">Xem chi tiết & Lịch trình</button>
+                <a href="#" onclick="bookNow('Dinner Date')" class="btn btn-cta">Đặt Ngay</a>
+            </div>
         </div>
 
         <div class="card">
-            <h3>The Special</h3>
-            <div class="price">2.490.000đ</div>
-            <div class="duration">6 Tiếng • Kỷ niệm & Cầu hôn</div>
-            <ul class="features">
-                <li><strong>Trọn gói dịch vụ VIP</strong></li>
-                <li>Trang trí xe hoa/đèn LED (Cốp sau)</li>
-                <li>Tặng 01 chai nước trái cây lên men</li>
-                <li>Hỗ trợ lên kế hoạch bất ngờ (A-Z)</li>
-                <li>Chụp ảnh & Quay video chuyên nghiệp</li>
-                <li>Thời gian linh hoạt thoải mái</li>
-            </ul>
-            <a href="#" onclick="bookNow()" class="btn">Tư vấn ngay</a>
+            <div>
+                <h3>The Special</h3>
+                <div class="price">2.490.000đ</div>
+                <div class="duration">6 Tiếng • Kỷ niệm & Cầu hôn</div>
+                <ul class="features">
+                    <li><strong>Trọn gói dịch vụ VIP</strong></li>
+                    <li>Trang trí xe hoa/đèn LED (Cốp sau)</li>
+                    <li>Tặng 01 chai nước trái cây lên men</li>
+                    <li>Hỗ trợ lên kế hoạch bất ngờ (A-Z)</li>
+                    <li>Chụp ảnh & Quay video chuyên nghiệp</li>
+                    <li>Thời gian linh hoạt thoải mái</li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <button onclick="openModal('modal-special')" class="btn btn-detail">Xem chi tiết & Lịch trình</button>
+                <a href="#" onclick="bookNow('The Special')" class="btn btn-cta">Tư vấn ngay</a>
+            </div>
         </div>
     </div>
 
-    <footer><p>© 2024 LoveRoute Saigon. All rights reserved.</p></footer>
+    <div id="modal-chill" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal-chill')">&times;</button>
+            <div class="modal-title">Chill Drive</div>
+            <div class="modal-subtitle">"Khoảng lặng êm đềm sau giờ tan tầm"</div>
+            <div class="modal-section">
+                <div class="modal-h3"><i class="fa-solid fa-book-open"></i> Câu chuyện gói này</div>
+                <p class="modal-text">Gói dịch vụ cơ bản nhất nhưng mang đậm triết lý của LoveRoute. Dành cho những cặp đôi muốn trốn khỏi tiếng ồn ào của phố thị, ngồi tựa vào nhau trên chiếc xe êm ái, nghe một bản nhạc Jazz và ngắm Sài Gòn lung linh qua khung cửa kính. Không cần đích đến, chính hành trình là một món quà.</p>
+            </div>
+            <div class="modal-section">
+                <div class="modal-h3"><i class="fa-regular fa-clock"></i> Timeline gợi ý (2.5 Tiếng)</div>
+                <div class="timeline-item"><span class="time">00:00</span><span class="activity">Đón khách tận nơi. Tài xế mở cửa, mời nước & khăn lạnh.</span></div>
+                <div class="timeline-item"><span class="time">00:30</span><span class="activity">Dạo quanh cung đường "Metropole Thủ Thiêm" ngắm view Quận 1.</span></div>
+                <div class="timeline-item"><span class="time">01:15</span><span class="activity">Di chuyển qua Cầu Ba Son, vòng quanh Nhà Thờ Đức Bà & Bưu Điện.</span></div>
+                <div class="timeline-item"><span class="time">02:30</span><span class="activity">Trả khách về điểm ban đầu an toàn.</span></div>
+            </div>
+            <div class="modal-section">
+                <div class="modal-h3"><i class="fa-solid fa-gift"></i> Tiện ích đi kèm</div>
+                <p class="modal-text">✦ Nước suối Lavie/Aquafina (bỏ nhãn).<br>✦ Khăn ướt tiệt trùng.<br>✦ Dù che mưa cỡ lớn (nếu trời mưa).<br>✦ Quyền chọn nhạc qua Spotify trên xe.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-dinner" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal-dinner')">&times;</button>
+            <div class="modal-title">Dinner Date</div>
+            <div class="modal-subtitle">"Bữa tối trọn vẹn cảm xúc"</div>
+            <div class="modal-section">
+                <div class="modal-h3"><i class="fa-solid fa-book-open"></i> Câu chuyện gói này</div>
+                <p class="modal-text">Đừng để việc tìm chỗ đậu xe hay kẹt xe làm hỏng tâm trạng trước bữa tối lãng mạn. Với Dinner Date, chúng tôi đưa bạn đến tận cửa nhà hàng như những VIP thực thụ và kiên nhẫn chờ đợi đến khi bạn dùng bữa xong để tiếp tục hành trình hóng gió đêm.</p>
+            </div>
+            <div class="modal-section">
+                <div class="modal-h3"><i class="fa-regular fa-clock"></i> Timeline gợi ý (4 Tiếng)</div>
+                <div class="timeline-item"><span class="time">18:00</span><span class="activity">Đón khách. Thưởng thức snack nhẹ trên xe.</span></div>
+                <div class="timeline-item"><span class="time">18:30</span><span class="activity">Đưa đến nhà hàng. Tài xế hỗ trợ mở cửa và chờ đợi tại bãi xe.</span></div>
+                <div class="timeline-item"><span class="time">18:30</span><span class="activity"><i>(Thời gian chờ khách ăn tối khoảng 1.5 - 2 tiếng)</i></span></div>
+                <div class="timeline-item"><span class="time">20:30</span><span class="activity">Đón khách sau bữa tối. Tiếp tục lộ trình hóng gió đêm mát rượi.</span></div>
+            </div>
+            <div class="modal-section">
+                <div class="modal-h3"><i class="fa-solid fa-utensils"></i> Gợi ý nhà hàng (LoveRoute Partner)</div>
+                <p class="modal-text">Chúng tôi có thể chở bạn đến bất kỳ đâu, nhưng đây là vài gợi ý lãng mạn:<br>✦ The Deck Saigon (Thảo Điền) - View sông.<br>✦ Clay (Thảo Điền) - Địa trung hải.<br>✦ Pizza 4P's (Các chi nhánh view đẹp).</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-special" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal-special')">&times;</button>
+            <div class="modal-title">The Special</div>
+            <div class="modal-subtitle">"Khoảnh khắc khắc cốt ghi tâm"</div>
+            <div class="modal-section">
+                <div class="modal-h3"><i class="fa-solid fa-book-open"></i> Câu chuyện gói này</div>
+                <p class="modal-text">Dành cho những dịp trọng đại: Cầu hôn, Kỷ niệm ngày cưới, hoặc Tỏ tình. LoveRoute sẽ biến chiếc xe thành một không gian bất ngờ với hoa và quà ở cốp sau. Chúng tôi cùng bạn lên kế hoạch chi tiết từng phút để đảm bảo người ấy vỡ òa trong hạnh phúc.</p>
+            </div>
+            <div class="modal-section">
+                <div class="modal-h3"><i class="fa-regular fa-clock"></i> Timeline mẫu (6 Tiếng)</div>
+                <div class="timeline-item"><span class="time">Chiều</span><span class="activity">Setup hoa và đèn LED ở cốp xe (theo yêu cầu bí mật).</span></div>
+                <div class="timeline-item"><span class="time">17:00</span><span class="activity">Đón khách đi ăn tối (như gói Dinner).</span></div>
+                <div class="timeline-item"><span class="time">20:30</span><span class="activity"><b>KHOẢNH KHẮC BẤT NGỜ:</b> Dừng xe, mời mở cốp lấy đồ -> Bất ngờ diễn ra.</span></div>
+                <div class="timeline-item"><span class="time">21:00</span><span class="activity">Chụp ảnh/Quay video kỷ niệm (Tài xế hỗ trợ).</span></div>
+            </div>
+            <div class="modal-section">
+                <div class="modal-h3"><i class="fa-solid fa-gem"></i> Đặc quyền VIP</div>
+                <p class="modal-text">✦ Tặng 01 chai Nước trái cây lên men (Sparkling).<br>✦ Hỗ trợ mua hoa/bánh kem (thanh toán bill thực tế).<br>✦ Tài xế kiêm "nháy" chụp ảnh nhiệt tình.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <footer><p>© 2025 LoveRoute Saigon. All rights reserved.</p></footer>
 
     <div class="music-player hidden" id="music-player">
         <div class="album-art" id="album-art"></div>
-        <div class="track-info">
-            <div class="track-name" id="track-name">LoveRoute Playlist</div>
-            <div class="track-artist" id="track-artist">Đang tải...</div>
-        </div>
+        <div class="track-info"><div class="track-name" id="track-name">LoveRoute Playlist</div><div class="track-artist" id="track-artist">Đang tải...</div></div>
         <div class="controls">
             <button class="ctrl-btn side-btn" style="opacity: 0.5;"><i class="fa-solid fa-shuffle"></i></button>
-            
             <button id="prev-btn" class="ctrl-btn side-btn"><i class="fa-solid fa-backward-step"></i></button>
-            
             <button id="play-btn" class="ctrl-btn"><i class="fa-solid fa-play"></i></button>
-            
             <button id="next-btn" class="ctrl-btn side-btn"><i class="fa-solid fa-forward-step"></i></button>
-            
             <button class="ctrl-btn side-btn" style="opacity: 0.5;"><i class="fa-solid fa-repeat"></i></button>
         </div>
         <div class="progress-container"><div id="progress-bar"></div></div>
     </div>
-
     <audio id="audio-source"></audio>
 
     <script>
         // 1. ZALO BOOKING
         const ZALO_NUMBER = "84869120021"; 
-        function bookNow() { window.open(`https://zalo.me/${ZALO_NUMBER}`, '_blank'); }
+        function bookNow(pkgName) { 
+            let msg = pkgName ? `Chào LoveRoute, mình quan tâm gói ${pkgName}, tư vấn giúp mình nhé!` : "Chào bạn";
+            window.open(`https://zalo.me/${ZALO_NUMBER}`, '_blank'); 
+        }
 
-        // 2. BACKGROUND SAO BAY
+        // 2. MODAL LOGIC
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('show');
+            document.body.style.overflow = 'hidden'; 
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+            document.body.style.overflow = 'auto'; 
+        }
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // 3. BACKGROUND SAO BAY
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let width, height, stars = [];
@@ -265,11 +367,10 @@
         }
         window.addEventListener('resize', initStars); initStars(); drawStars();
 
-        // 3. PLAYLIST NHẠC THÔNG MINH
-        // (Đã cập nhật theo danh sách file bạn đã up thành công)
+        // 4. PLAYLIST NHẠC (ĐÃ CẬP NHẬT MỚI)
         const playlist = [
             { file: 'bai1.mp3', name: 'Vạn vật như muốn ta bên nhau', artist: 'Rio ft. 52Hz' },
-            { file: 'bai3.mp3', name: 'Âm thầm bên em', artist: 'Sơn Tùng MTP' },
+            { file: 'bai3.mp3', name: 'Âm thầm bên em', artist: 'Sơn Tùng M-TP' },
             { file: 'bai4.mp3', name: 'Người đầu tiên', artist: 'Juky San, buitruonglinh' },
             { file: 'bai5.mp3', name: 'ĐỢI', artist: '52Hz' }
         ];
@@ -290,45 +391,38 @@
             trackArtistEl.innerText = song.artist;
             audio.src = song.file;
         }
-        // Cập nhật hàm Play/Pause để đổi ICON thay vì đổi TEXT
         function playSong() {
-            audio.play();
-            playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; // Đổi sang icon Pause
-            albumArt.classList.add('playing');
+            audio.play(); playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; albumArt.classList.add('playing');
         }
         function pauseSong() {
-            audio.pause();
-            playBtn.innerHTML = '<i class="fa-solid fa-play"></i>'; // Đổi về icon Play
-            albumArt.classList.remove('playing');
+            audio.pause(); playBtn.innerHTML = '<i class="fa-solid fa-play"></i>'; albumArt.classList.remove('playing');
         }
         function nextSong() {
             currentSongIndex++;
             if (currentSongIndex > playlist.length - 1) currentSongIndex = 0;
+            // Bỏ qua bài 2 nếu nó bị ẩn (Logic nâng cao để tránh lỗi)
+            if(!playlist[currentSongIndex]) { currentSongIndex++; } 
+            
             loadSong(playlist[currentSongIndex]); playSong();
         }
         function prevSong() {
             currentSongIndex--;
             if (currentSongIndex < 0) currentSongIndex = playlist.length - 1;
+             // Bỏ qua bài 2 nếu nó bị ẩn
+            if(!playlist[currentSongIndex]) { currentSongIndex--; } 
+
             loadSong(playlist[currentSongIndex]); playSong();
         }
 
-        // KHỞI TẠO
-        if(playlist.length > 0) {
-            loadSong(playlist[0]);
-        }
+        if(playlist.length > 0) loadSong(playlist[0]);
 
         window.addEventListener('load', () => { setTimeout(() => { player.classList.remove('hidden'); }, 1000); });
         
-        playBtn.addEventListener('click', () => {
-            const isPlaying = audio.paused === false;
-            if (isPlaying) pauseSong(); else playSong();
-        });
+        playBtn.addEventListener('click', () => { const isPlaying = audio.paused === false; if (isPlaying) pauseSong(); else playSong(); });
         nextBtn.addEventListener('click', nextSong);
         prevBtn.addEventListener('click', prevSong);
         audio.addEventListener('ended', nextSong);
-        audio.addEventListener('timeupdate', () => {
-            if(audio.duration) progressBar.style.width = `${(audio.currentTime/audio.duration)*100}%`;
-        });
+        audio.addEventListener('timeupdate', () => { if(audio.duration) progressBar.style.width = `${(audio.currentTime/audio.duration)*100}%`; });
     </script>
 </body>
 </html>
