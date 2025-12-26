@@ -7,6 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -30,7 +31,7 @@
             font-family: var(--font-body);
             overflow-x: hidden;
             position: relative;
-            padding-bottom: 120px; /* Chừa chỗ cho thanh nhạc */
+            padding-bottom: 130px; /* Chừa chỗ rộng hơn cho player mới */
         }
 
         #canvas-bg {
@@ -82,46 +83,67 @@
         
         footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.6; }
 
-        /* --- MUSIC PLAYER STYLE (CÓ NÚT NEXT) --- */
+        /* --- MUSIC PLAYER NEW STYLE (SPOTIFY LOOK) --- */
         .music-player {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 420px;
+            width: 95%; max-width: 450px; /* Rộng hơn xíu */
             background: rgba(0, 31, 63, 0.95); backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.6); border-radius: 50px;
-            padding: 10px 20px; display: flex; align-items: center; gap: 10px;
-            z-index: 9999; box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 50px;
+            padding: 12px 25px; display: flex; align-items: center; gap: 15px;
+            z-index: 9999; box-shadow: 0 15px 40px rgba(0,0,0,0.7);
             transition: bottom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .music-player.hidden { bottom: -150px; }
         
         .album-art {
-            width: 45px; height: 45px; border-radius: 50%;
+            width: 50px; height: 50px; border-radius: 50%; /* Ảnh to hơn chút */
             background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=200&auto=format&fit=crop');
             background-size: cover; background-position: center;
             border: 2px solid var(--gold-color);
             animation: spin 8s linear infinite; animation-play-state: paused;
             flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
         .album-art.playing { animation-play-state: running; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        .track-info { flex: 1; overflow: hidden; margin-left: 5px; }
-        .track-name { font-size: 0.9rem; color: var(--gold-color); font-weight: 600; white-space: nowrap; font-family: var(--font-body); }
-        .track-artist { font-size: 0.7rem; color: #ccc; margin-top: 2px; }
+        .track-info { flex: 1; overflow: hidden; }
+        .track-name { font-size: 1rem; color: var(--gold-color); font-weight: 700; white-space: nowrap; font-family: var(--font-body); }
+        .track-artist { font-size: 0.75rem; color: #ccc; margin-top: 3px; }
 
-        .controls { display: flex; align-items: center; gap: 5px; }
-        .ctrl-btn { background: none; border: none; color: var(--gold-color); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        #play-btn { font-size: 1.6rem; width: 35px; }
-        #next-btn, #prev-btn { font-size: 1.2rem; opacity: 0.8; padding: 5px; }
+        /* STYLE CÁC NÚT BẤM MỚI */
+        .controls { display: flex; align-items: center; gap: 15px; }
+        .ctrl-btn { background: none; border: none; color: var(--gold-color); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        
+        /* Nút phụ (Next, Back, Shuffle...) */
+        .side-btn { font-size: 1.3rem; opacity: 0.7; }
+        .side-btn:hover { opacity: 1; transform: scale(1.1); }
+
+        /* Nút Play chính giữa (Hình tròn nổi bật) */
+        #play-btn {
+            font-size: 1.6rem;
+            width: 50px; height: 50px;
+            background: var(--gold-color); /* Nền vàng */
+            color: #001F3F; /* Icon màu tối */
+            border-radius: 50%; /* Bo tròn */
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+        }
+        #play-btn:hover { transform: scale(1.1); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.7); }
+        #play-btn i { margin-left: 2px; /* Căn chỉnh icon play cho giữa */ }
+        #play-btn i.fa-pause { margin-left: 0; }
 
         .progress-container {
-            position: absolute; bottom: 0; left: 25px; right: 25px;
-            height: 3px; background: rgba(255,255,255,0.1);
+            position: absolute; bottom: 0; left: 30px; right: 30px;
+            height: 4px; background: rgba(255,255,255,0.1);
             border-radius: 10px; overflow: hidden;
         }
         #progress-bar { width: 0%; height: 100%; background: var(--gold-color); transition: width 0.1s linear; }
 
-        @media (max-width: 768px) { .card.featured { transform: scale(1); order: -1; margin-bottom: 20px; } }
+        @media (max-width: 768px) { 
+            .card.featured { transform: scale(1); order: -1; margin-bottom: 20px; }
+            .track-info { display: none; } /* Ẩn tên bài trên mobile để gọn */
+            .music-player { justify-content: center; padding: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -201,9 +223,15 @@
             <div class="track-artist" id="track-artist">Đang tải...</div>
         </div>
         <div class="controls">
-            <button id="prev-btn" class="ctrl-btn">⏮</button>
-            <button id="play-btn" class="ctrl-btn">▶</button>
-            <button id="next-btn" class="ctrl-btn">⏭</button>
+            <button class="ctrl-btn side-btn" style="opacity: 0.5;"><i class="fa-solid fa-shuffle"></i></button>
+            
+            <button id="prev-btn" class="ctrl-btn side-btn"><i class="fa-solid fa-backward-step"></i></button>
+            
+            <button id="play-btn" class="ctrl-btn"><i class="fa-solid fa-play"></i></button>
+            
+            <button id="next-btn" class="ctrl-btn side-btn"><i class="fa-solid fa-forward-step"></i></button>
+            
+            <button class="ctrl-btn side-btn" style="opacity: 0.5;"><i class="fa-solid fa-repeat"></i></button>
         </div>
         <div class="progress-container"><div id="progress-bar"></div></div>
     </div>
@@ -212,7 +240,7 @@
 
     <script>
         // 1. ZALO BOOKING
-        const ZALO_NUMBER = "84869120021"; // Thay số của bạn
+        const ZALO_NUMBER = "84869120021"; 
         function bookNow() { window.open(`https://zalo.me/${ZALO_NUMBER}`, '_blank'); }
 
         // 2. BACKGROUND SAO BAY
@@ -238,11 +266,9 @@
         window.addEventListener('resize', initStars); initStars(); drawStars();
 
         // 3. PLAYLIST NHẠC THÔNG MINH
-        // LƯU Ý: Tên file phải khớp 100% với file bạn đã upload lên GitHub
+        // (Đã cập nhật theo danh sách file bạn đã up thành công)
         const playlist = [
             { file: 'bai1.mp3', name: 'Vạn vật như muốn ta bên nhau', artist: 'Rio ft. 52Hz' },
-            // Bài 2 tôi tạm tắt vì trong ảnh bạn chưa up, nếu up rồi thì bỏ dấu // ở đầu dòng dưới đi
-            // { file: 'bai2.mp3', name: 'Hơn Cả Yêu', artist: 'Đức Phúc' },
             { file: 'bai3.mp3', name: 'Âm thầm bên em', artist: 'Sơn Tùng MTP' },
             { file: 'bai4.mp3', name: 'Người đầu tiên', artist: 'Juky San, buitruonglinh' },
             { file: 'bai5.mp3', name: 'ĐỢI', artist: '52Hz' }
@@ -264,11 +290,16 @@
             trackArtistEl.innerText = song.artist;
             audio.src = song.file;
         }
+        // Cập nhật hàm Play/Pause để đổi ICON thay vì đổi TEXT
         function playSong() {
-            audio.play(); playBtn.innerText = "❚❚"; albumArt.classList.add('playing');
+            audio.play();
+            playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; // Đổi sang icon Pause
+            albumArt.classList.add('playing');
         }
         function pauseSong() {
-            audio.pause(); playBtn.innerText = "▶"; albumArt.classList.remove('playing');
+            audio.pause();
+            playBtn.innerHTML = '<i class="fa-solid fa-play"></i>'; // Đổi về icon Play
+            albumArt.classList.remove('playing');
         }
         function nextSong() {
             currentSongIndex++;
@@ -289,7 +320,7 @@
         window.addEventListener('load', () => { setTimeout(() => { player.classList.remove('hidden'); }, 1000); });
         
         playBtn.addEventListener('click', () => {
-            const isPlaying = playBtn.innerText === "❚❚";
+            const isPlaying = audio.paused === false;
             if (isPlaying) pauseSong(); else playSong();
         });
         nextBtn.addEventListener('click', nextSong);
