@@ -211,6 +211,107 @@
             }
             .logo { font-size: 2rem; }
         }
+   /* --- MUSIC PLAYER (SPOTIFY STYLE) --- */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(0, 31, 63, 0.85); /* Nền tối mờ */
+            backdrop-filter: blur(15px); /* Hiệu ứng kính */
+            border: 1px solid rgba(212, 175, 55, 0.5); /* Viền vàng */
+            border-radius: 50px; /* Bo tròn dạng viên thuốc */
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000; /* Luôn nổi trên cùng */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: bottom 0.5s ease;
+        }
+
+        /* Ẩn player khi chưa load xong */
+        .music-player.hidden {
+            bottom: -100px;
+        }
+
+        /* Ảnh Album xoay tròn */
+        .album-art {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-image: url('https://images.unsplash.com/photo-1493225255756-d9584f8606e9?q=80&w=200&auto=format&fit=crop'); /* Ảnh Jazz */
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--gold-color);
+            animation: spin 10s linear infinite;
+            animation-play-state: paused; /* Mặc định dừng */
+        }
+
+        .album-art.playing {
+            animation-play-state: running; /* Quay khi hát */
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Thông tin bài hát */
+        .track-info {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .track-name {
+            font-size: 0.9rem;
+            color: var(--gold-color);
+            font-weight: 600;
+            white-space: nowrap;
+            font-family: var(--font-body);
+        }
+
+        .track-artist {
+            font-size: 0.7rem;
+            color: #ccc;
+            margin-top: 2px;
+        }
+
+        /* Nút điều khiển */
+        .controls {
+            display: flex;
+            align-items: center;
+        }
+
+        #play-btn {
+            background: none;
+            border: none;
+            color: var(--gold-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Thanh tiến trình (Progress Bar nhỏ) */
+        .progress-container {
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--gold-color);
+            transition: width 0.1s linear;
+        }
+    
     </style>
 </head>
 <body>
@@ -354,6 +455,62 @@
         window.addEventListener('resize', init);
         init();
         draw();
+   // --- XỬ LÝ MUSIC PLAYER ---
+        const player = document.getElementById('music-player');
+        const audio = document.getElementById('audio-source');
+        const playBtn = document.getElementById('play-btn');
+        const albumArt = document.getElementById('album-art');
+        const progressBar = document.getElementById('progress-bar');
+
+        // Hiện player sau 1 giây (hiệu ứng trượt lên)
+        setTimeout(() => {
+            player.classList.remove('hidden');
+        }, 1000);
+
+        // Nút Play/Pause
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = "❚❚"; // Đổi thành icon Pause
+                albumArt.classList.add('playing'); // Quay đĩa
+            } else {
+                audio.pause();
+                playBtn.innerHTML = "▶"; // Đổi về icon Play
+                albumArt.classList.remove('playing'); // Dừng quay
+            }
+        });
+
+        // Cập nhật thanh nhạc
+        audio.addEventListener('timeupdate', () => {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${percent}%`;
+        });
+
+        // Khi hết bài thì tự reset
+        audio.addEventListener('ended', () => {
+            playBtn.innerHTML = "▶";
+            albumArt.classList.remove('playing');
+            progressBar.style.width = "0%";
+        });
+    
     </script>
+<div class="music-player hidden" id="music-player">
+        <div class="album-art" id="album-art"></div>
+        
+        <div class="track-info">
+            <div class="track-name">LoveRoute Jazz Lounge</div>
+            <div class="track-artist">Relaxing Vibes</div>
+        </div>
+
+        <div class="controls">
+            <button id="play-btn">▶</button> </div>
+
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+    </div>
+
+    <audio id="audio-source" src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8a73467.mp3?filename=jazz-abstract-110966.mp3"></audio>
+
 </body>
 </html>
