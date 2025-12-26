@@ -39,13 +39,22 @@
             z-index: -1; background: radial-gradient(circle at bottom, #0b2e59 0%, #001F3F 100%);
         }
 
-        /* HEADER */
-        header { text-align: center; padding: 40px 20px 20px 20px; }
+        /* HEADER & NAV */
+        header { text-align: center; padding: 40px 20px 10px 20px; }
         .logo {
             font-family: var(--font-title); font-size: 2.5rem; color: var(--gold-color);
             letter-spacing: 2px; margin-bottom: 5px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            text-transform: uppercase;
         }
-        .slogan { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.8; font-weight: 300; }
+        .slogan { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.8; font-weight: 300; margin-bottom: 25px; }
+        
+        /* MENU ĐIỀU HƯỚNG MỚI */
+        .nav-menu { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
+        .nav-link {
+            color: var(--gold-color); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;
+            padding-bottom: 5px; border-bottom: 1px solid transparent; transition: all 0.3s; cursor: pointer;
+        }
+        .nav-link:hover { border-bottom: 1px solid var(--gold-color); opacity: 1; }
 
         /* CARDS */
         .container {
@@ -90,29 +99,34 @@
         
         footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.6; }
 
-        /* --- MODAL (POPUP CHI TIẾT) --- */
+        /* --- MODAL (POPUP) --- */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 31, 63, 0.9); z-index: 10000; align-items: center; justify-content: center;
+            background-color: rgba(0, 31, 63, 0.95); z-index: 10000; align-items: center; justify-content: center;
             opacity: 0; transition: opacity 0.3s ease;
         }
         .modal.show { display: flex; opacity: 1; }
         .modal-content {
             background: #0B1026; border: 1px solid var(--gold-color);
-            width: 90%; max-width: 600px; max-height: 85vh; border-radius: 15px; padding: 30px; position: relative;
+            width: 90%; max-width: 700px; max-height: 90vh; border-radius: 15px; padding: 40px; position: relative;
             overflow-y: auto; box-shadow: 0 0 50px rgba(0,0,0,0.8);
             transform: translateY(20px); transition: transform 0.3s ease;
         }
         .modal.show .modal-content { transform: translateY(0); }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #fff; cursor: pointer; background: none; border: none; }
-        .close-btn:hover { color: var(--gold-color); }
+        
+        .modal-title { font-family: var(--font-serif); font-size: 2rem; color: var(--gold-color); margin-bottom: 5px; text-align: center;}
+        .modal-subtitle { text-align: center; font-style: italic; opacity: 0.7; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        
+        /* About Us Content Style */
+        .about-text { font-size: 1rem; line-height: 1.8; color: #e0e0e0; text-align: justify; margin-bottom: 20px; font-weight: 300; }
+        .about-highlight { color: var(--gold-color); font-weight: 600; font-family: var(--font-serif); font-size: 1.2rem; margin-top: 30px; margin-bottom: 15px; display: block; border-left: 3px solid var(--gold-color); padding-left: 15px; }
+        .signature { text-align: right; margin-top: 40px; font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--gold-color); }
 
-        .modal-title { font-family: var(--font-serif); font-size: 1.8rem; color: var(--gold-color); margin-bottom: 5px; text-align: center;}
-        .modal-subtitle { text-align: center; font-style: italic; opacity: 0.7; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 15px; }
+        /* Other Modal Styles */
         .modal-section { margin-bottom: 25px; }
         .modal-h3 { font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-light); margin-bottom: 10px; display: flex; align-items: center; }
         .modal-h3 i { margin-right: 10px; }
-        .modal-text { font-size: 0.95rem; line-height: 1.6; color: #ddd; font-weight: 300; text-align: justify; }
         .timeline-item { display: flex; gap: 15px; margin-bottom: 10px; }
         .time { font-weight: bold; color: var(--gold-color); min-width: 60px; }
         .activity { color: #eee; }
@@ -148,7 +162,8 @@
         @media (max-width: 768px) { 
             .card.featured { transform: scale(1); order: -1; margin-bottom: 20px; }
             .track-info { display: none; }
-            .modal-content { width: 95%; padding: 20px; }
+            .modal-content { width: 95%; padding: 25px 20px; }
+            .logo { font-size: 2rem; }
         }
     </style>
 </head>
@@ -159,16 +174,16 @@
     <header>
         <div class="logo">LoveRoute</div>
         <div class="slogan">Private Date Chauffeur</div>
+        
+        <nav class="nav-menu">
+            <a onclick="openModal('modal-about')" class="nav-link">Về chúng tôi</a>
+            <a href="#" onclick="bookNow()" class="nav-link">Liên hệ</a>
+        </nav>
     </header>
 
-    <section style="max-width: 800px; margin: 0 auto 50px auto; padding: 0 25px; text-align: center; position: relative; z-index: 2;">
-        <h2 style="font-family: 'Montserrat', sans-serif; color: var(--gold-color); font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 30px; border-bottom: 1px solid rgba(212, 175, 55, 0.3); display: inline-block; padding-bottom: 10px;">
-            Brand Story
-        </h2>
+    <section style="max-width: 800px; margin: 0 auto 40px auto; padding: 0 25px; text-align: center; position: relative; z-index: 2;">
         <div style="font-family: 'Playfair Display', serif; font-size: 1.1rem; line-height: 1.8; color: #e0e0e0; font-style: italic;">
-            “Sài Gòn náo nhiệt, nhưng đôi khi lại thiếu đi những khoảng lặng dành cho hai người. Chúng ta thường mất hàng giờ chuẩn bị cho một buổi hẹn, để rồi sự háo hức ấy vơi đi ít nhiều giữa tiếng còi xe, khói bụi và những lo toan vụn vặt.
-            <br><br>
-            LoveRoute ra đời để thay đổi điều đó. Không đơn thuần là một chuyến xe, chúng tôi muốn trở thành người 'quản gia' cho cảm xúc của bạn. Với dòng xe điện VF 6 vận hành êm ái tuyệt đối, LoveRoute tách biệt bạn khỏi sự xô bồ ngay khi cánh cửa đóng lại. Ở đây không có tiếng ồn. Chỉ có hương thơm tinh tế, âm nhạc riêng tư và khoảnh khắc trọn vẹn bên người quan trọng nhất.”
+            “LoveRoute ra đời để thay đổi định nghĩa về sự di chuyển. Không đơn thuần là một chuyến xe, chúng tôi muốn trở thành người 'quản gia' cho cảm xúc của bạn. Ở đây không có tiếng ồn. Chỉ có hương thơm tinh tế, âm nhạc riêng tư và khoảnh khắc trọn vẹn bên người quan trọng nhất.”
         </div>
         <div style="color: var(--gold-color); font-size: 1.5rem; margin-top: 25px; opacity: 0.8;">✦</div>
     </section>
@@ -232,6 +247,33 @@
                 <button onclick="openModal('modal-special')" class="btn btn-detail">Xem chi tiết & Lịch trình</button>
                 <a href="#" onclick="bookNow('The Special')" class="btn btn-cta">Tư vấn ngay</a>
             </div>
+        </div>
+    </div>
+
+    <div id="modal-about" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('modal-about')">&times;</button>
+            <div class="modal-title">Về LoveRoute</div>
+            <div class="modal-subtitle">"Hơn cả một hành trình, là một trải nghiệm cảm xúc"</div>
+
+            <span class="about-highlight">01. Khởi nguồn</span>
+            <p class="about-text">
+                Sài Gòn hoa lệ, nhưng đôi khi quá ồn ào để lắng nghe nhịp đập của trái tim. Ý tưởng về LoveRoute ra đời vào một buổi tối muộn, khi chúng tôi nhận ra rằng: <i>"Tại sao chúng ta dành hàng giờ chuẩn bị cho một buổi hẹn hoàn hảo, để rồi cảm xúc ấy lại vơi đi ít nhiều giữa khói bụi, tiếng còi xe và sự mệt mỏi khi cầm lái?"</i>
+                <br>Chúng tôi khao khát tạo ra một "khoảng lặng" di động, nơi các cặp đôi được tách biệt hoàn toàn với thế giới bên ngoài ngay khi cánh cửa đóng lại.
+            </p>
+
+            <span class="about-highlight">02. Triết lý "Không gian thứ 3"</span>
+            <p class="about-text">
+                Không phải ở Nhà (Home), không phải ở Công sở (Work) hay Nhà hàng ồn ã. LoveRoute tạo ra một <b>Không gian thứ 3</b> – riêng tư tuyệt đối trên nền tảng dòng xe điện VF 6 vận hành tĩnh lặng. Chúng tôi tin rằng chiếc xe không chỉ là phương tiện đưa bạn từ điểm A đến điểm B, mà chính thời gian ngồi trên xe là lúc để nắm tay, để trò chuyện và để kết nối sâu sắc nhất.
+            </p>
+
+            <span class="about-highlight">03. Cam kết của "Người quản gia"</span>
+            <p class="about-text">
+                Tại LoveRoute, chúng tôi không gọi nhân sự của mình là "Tài xế". Họ là những <b>Người quản gia (Chauffeur)</b> chuyên nghiệp.
+                <br>Chúng tôi cam kết mang đến trải nghiệm chuẩn 5 sao: Từ việc mở cửa xe, chuẩn bị nhiệt độ phù hợp, đến sự tinh tế trong việc chọn nhạc và tôn trọng sự riêng tư tuyệt đối của khách hàng. Mỗi chuyến đi là một tác phẩm nghệ thuật của sự phục vụ, nơi bạn là nhân vật chính.
+            </p>
+
+            <div class="signature">LoveRoute Team.</div>
         </div>
     </div>
 
@@ -304,8 +346,7 @@
         </div>
     </div>
 
-
-    <footer><p>© 2025 LoveRoute Saigon. All rights reserved.</p></footer>
+    <footer><p>© 2024 LoveRoute Saigon. All rights reserved.</p></footer>
 
     <div class="music-player hidden" id="music-player">
         <div class="album-art" id="album-art"></div>
@@ -323,7 +364,7 @@
 
     <script>
         // 1. ZALO BOOKING
-        const ZALO_NUMBER = "84869120021"; 
+        const ZALO_NUMBER = "84901234567"; 
         function bookNow(pkgName) { 
             let msg = pkgName ? `Chào LoveRoute, mình quan tâm gói ${pkgName}, tư vấn giúp mình nhé!` : "Chào bạn";
             window.open(`https://zalo.me/${ZALO_NUMBER}`, '_blank'); 
@@ -367,9 +408,11 @@
         }
         window.addEventListener('resize', initStars); initStars(); drawStars();
 
-        // 4. PLAYLIST NHẠC (ĐÃ CẬP NHẬT MỚI)
+        // 4. PLAYLIST NHẠC
         const playlist = [
             { file: 'bai1.mp3', name: 'Vạn vật như muốn ta bên nhau', artist: 'Rio ft. 52Hz' },
+            // Bài 2 ẩn
+            // { file: 'bai2.mp3', name: 'Hơn Cả Yêu', artist: 'Đức Phúc' },
             { file: 'bai3.mp3', name: 'Âm thầm bên em', artist: 'Sơn Tùng M-TP' },
             { file: 'bai4.mp3', name: 'Người đầu tiên', artist: 'Juky San, buitruonglinh' },
             { file: 'bai5.mp3', name: 'ĐỢI', artist: '52Hz' }
@@ -400,7 +443,7 @@
         function nextSong() {
             currentSongIndex++;
             if (currentSongIndex > playlist.length - 1) currentSongIndex = 0;
-            // Bỏ qua bài 2 nếu nó bị ẩn (Logic nâng cao để tránh lỗi)
+            // Bỏ qua bài 2 nếu nó bị ẩn
             if(!playlist[currentSongIndex]) { currentSongIndex++; } 
             
             loadSong(playlist[currentSongIndex]); playSong();
