@@ -46,7 +46,6 @@
             letter-spacing: 2px; margin-bottom: 5px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
             text-transform: uppercase;
         }
-        .slogan { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.8; font-weight: 300; margin-bottom: 25px; }
         
         .nav-menu { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
         .nav-link {
@@ -78,7 +77,14 @@
             font-size: 0.8rem; font-weight: bold; border-radius: 20px; text-transform: uppercase;
         }
         .card h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 10px; color: var(--gold-light); font-weight: 700; }
+        
+        /* PRICE STYLES */
+        .original-price {
+            text-decoration: line-through; color: #aaa; /* Màu xám gạch ngang */
+            font-size: 1rem; margin-bottom: -5px; font-weight: 400; font-family: var(--font-body);
+        }
         .price { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
+        
         .duration { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; font-style: italic; }
         .features { list-style: none; text-align: left; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.6; }
         .features li { margin-bottom: 10px; display: flex; align-items: flex-start; }
@@ -98,9 +104,7 @@
         footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.6; }
 
         /* --- CALENDLY SECTION --- */
-        .calendar-section {
-            max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: center;
-        }
+        .calendar-section { max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: center; }
         .calendar-title {
             font-family: var(--font-serif); font-size: 1.5rem; color: var(--gold-color); 
             text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px;
@@ -108,11 +112,10 @@
         }
         .calendly-container {
             border: 1px solid var(--gold-color); border-radius: 15px; overflow: hidden;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            background: #fff; /* Calendly nền trắng nên cần container trắng hoặc trong suốt */
+            box-shadow: 0 0 20px rgba(0,0,0,0.5); background: #fff;
         }
 
-        /* --- MODAL (POPUP) --- */
+        /* --- MODAL --- */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 31, 63, 0.95); z-index: 10000; align-items: center; justify-content: center;
@@ -205,6 +208,7 @@
         <div class="card">
             <div>
                 <h3>Chill Drive</h3>
+                <div style="height: 19px;"></div> 
                 <div class="price">699.000đ</div>
                 <div class="duration">2.5 Tiếng • Dạo phố</div>
                 <ul class="features">
@@ -225,7 +229,7 @@
             <div class="badge">Phổ biến nhất</div>
             <div>
                 <h3>Dinner Date</h3>
-                <div class="price">1.290.000đ</div>
+                <div class="original-price">2.990.000đ</div> <div class="price">1.290.000đ</div>
                 <div class="duration">4 Tiếng • Ăn tối & Hóng gió</div>
                 <ul class="features">
                     <li><strong>Tất cả quyền lợi gói Chill</strong></li>
@@ -245,7 +249,7 @@
         <div class="card">
             <div>
                 <h3>The Special</h3>
-                <div class="price">2.490.000đ</div>
+                <div class="original-price">4.190.000đ</div> <div class="price">2.490.000đ</div>
                 <div class="duration">6 Tiếng • Kỷ niệm & Cầu hôn</div>
                 <ul class="features">
                     <li><strong>Trọn gói dịch vụ VIP</strong></li>
