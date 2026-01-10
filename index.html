@@ -117,19 +117,79 @@
         }
 
         /* --- MODAL (POPUP) --- */
+        /* --- CẬP NHẬT CSS MODAL (Căn giữa chuẩn) --- */
         .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 31, 63, 0.95); z-index: 10000; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.3s ease;
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%;
+            background-color: rgba(0, 31, 63, 0.95); 
+            z-index: 10000; 
+            
+            /* Dùng Flexbox để căn giữa tuyệt đối */
+            display: none; /* Mặc định ẩn, JS sẽ đổi thành flex */
+            align-items: center; 
+            justify-content: center;
+            
+            opacity: 0; 
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px); /* Làm mờ nền đằng sau thêm chút cho đẹp */
         }
-        .modal.show { display: flex; opacity: 1; }
+        
+        /* Class này để JS kích hoạt hiển thị */
+        .modal.show {
+            display: flex; /* Quan trọng: Phải là flex mới căn giữa được */
+            opacity: 1;
+        }
+
         .modal-content {
-            background: #0B1026; border: 1px solid var(--gold-color);
-            width: 90%; max-width: 700px; max-height: 90vh; border-radius: 15px; padding: 40px; position: relative;
-            overflow-y: auto; box-shadow: 0 0 50px rgba(0,0,0,0.8);
-            transform: translateY(20px); transition: transform 0.3s ease;
+            background: #0B1026; 
+            border: 1px solid var(--gold-color);
+            width: 90%; 
+            max-width: 600px; /* Thu hẹp lại một chút cho sang */
+            max-height: 85vh; 
+            border-radius: 15px; 
+            padding: 40px; 
+            position: relative;
+            overflow-y: auto; 
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            
+            /* Reset margin để không bị lệch */
+            margin: auto; 
+            
+            /* Hiệu ứng trồi lên */
+            transform: translateY(30px); 
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .modal.show .modal-content { transform: translateY(0); }
+        
+        .modal.show .modal-content { 
+            transform: translateY(0); 
+        }
+
+        /* --- CẬP NHẬT CSS MUSIC PLAYER (Hiệu ứng trượt) --- */
+        .music-player {
+            position: fixed; 
+            bottom: 20px; /* Vị trí khi hiện */
+            left: 50%; 
+            transform: translateX(-50%);
+            width: 95%; max-width: 450px;
+            background: rgba(0, 31, 63, 0.95); 
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.4); 
+            border-radius: 50px;
+            padding: 12px 25px; 
+            display: flex; align-items: center; gap: 15px;
+            z-index: 9999; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+            
+            /* Hiệu ứng chuyển động mượt mà cho thuộc tính bottom */
+            transition: bottom 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Khi có class hidden, nó sẽ trượt xuống dưới đáy màn hình */
+        .music-player.hidden { 
+            bottom: -150px; 
+        }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #fff; cursor: pointer; background: none; border: none; }
         
         .modal-title { font-family: var(--font-serif); font-size: 2rem; color: var(--gold-color); margin-bottom: 5px; text-align: center;}
@@ -411,22 +471,43 @@
             window.open(`https://zalo.me/${ZALO_NUMBER}`, '_blank'); 
         }
 
-        // 2. MODAL LOGIC
+       // 2. MODAL LOGIC & PLAYER CONTROL
+        const musicPlayerEl = document.getElementById('music-player');
+
         function openModal(modalId) {
+            // Hiện Modal
             document.getElementById(modalId).classList.add('show');
-            document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden'; // Khóa cuộn trang chính
+            
+            // Ẩn thanh nhạc xuống (nhạc vẫn hát bình thường)
+            if(musicPlayerEl) {
+                musicPlayerEl.classList.add('hidden');
+            }
         }
+
         function closeModal(modalId) {
+            // Ẩn Modal
             document.getElementById(modalId).classList.remove('show');
-            document.body.style.overflow = 'auto'; 
+            document.body.style.overflow = 'auto'; // Mở lại cuộn trang
+            
+            // Hiện lại thanh nhạc
+            if(musicPlayerEl) {
+                musicPlayerEl.classList.remove('hidden');
+            }
         }
+
+        // Xử lý khi click ra ngoài vùng Modal để đóng
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.classList.remove('show');
                 document.body.style.overflow = 'auto';
+                
+                // Hiện lại thanh nhạc khi click ra ngoài
+                if(musicPlayerEl) {
+                    musicPlayerEl.classList.remove('hidden');
+                }
             }
         }
-
         // 3. BACKGROUND SAO BAY
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
