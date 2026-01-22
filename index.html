@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. CẤU HÌNH GIAO DIỆN (GIỮ NGUYÊN) --- */
+        /* --- 1. CẤU HÌNH GIAO DIỆN --- */
         :root {
             --bg-color: #001F3F; 
             --gold-color: #D4AF37; 
@@ -80,12 +80,8 @@
         }
         .card h3 { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 5px; color: var(--gold-light); font-weight: 700; }
         
-        /* Chỉnh sửa phần note giá bao gồm VAT */
         .vat-note { font-size: 0.75rem; color: #aaa; font-style: italic; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
 
-        .original-price {
-            text-decoration: line-through; color: #aaa;
-            font-size: 1rem; margin-bottom: -5px; font-weight: 400; font-family: var(--font-body); }
         .price { font-size: 1.8rem; font-weight: 700; margin-bottom: 5px; color: #fff; }
         .duration { font-size: 0.9rem; opacity: 0.7; margin-bottom: 20px; font-style: italic; }
         .features { list-style: none; text-align: left; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.6; }
@@ -105,22 +101,16 @@
         
         footer { text-align: center; padding: 40px; font-size: 0.8rem; opacity: 0.6; }
 
-        /* --- CALENDLY SECTION --- */
-        .calendar-section {
-            max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: center;
-        }
+        /* --- CALENDLY --- */
+        .calendar-section { max-width: 900px; margin: 60px auto; padding: 0 20px; text-align: center; }
         .calendar-title {
             font-family: var(--font-serif); font-size: 1.5rem; color: var(--gold-color); 
             text-transform: uppercase; letter-spacing: 2px; margin-bottom: 30px;
             display: inline-block; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 10px;
         }
-        .calendly-container {
-            border: 1px solid var(--gold-color); border-radius: 15px; overflow: hidden;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            background: #fff; 
-        }
+        .calendly-container { border: 1px solid var(--gold-color); border-radius: 15px; overflow: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.5); background: #fff; }
 
-        /* --- MODAL (POPUP) --- */
+        /* --- MODAL --- */
         .modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(0, 31, 63, 0.95); z-index: 10000; 
@@ -140,11 +130,10 @@
         }
         .modal.show .modal-content { transform: translateY(0); }
 
-        /* --- CSS CHO DANH SÁCH NHÀ HÀNG (ACCORDION) --- */
+        /* --- ACCORDION --- */
         .restaurant-list { margin-top: 10px; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 10px; overflow: hidden; }
         .res-item { border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
         .res-item:last-child { border-bottom: none; }
-        
         .res-toggle {
             width: 100%; background: rgba(255, 255, 255, 0.05); color: var(--gold-color);
             border: none; padding: 15px; text-align: left; cursor: pointer;
@@ -153,10 +142,8 @@
             transition: all 0.3s;
         }
         .res-toggle:hover { background: rgba(212, 175, 55, 0.1); }
-        
         .res-detail {
-            display: none; /* Mặc định ẩn */
-            padding: 15px; background: rgba(0, 0, 0, 0.2);
+            display: none; padding: 15px; background: rgba(0, 0, 0, 0.2);
             color: #ddd; font-size: 0.9rem; line-height: 1.6;
         }
         .res-detail ul { padding-left: 20px; margin: 0; }
@@ -186,12 +173,11 @@
         .signature { text-align: right; margin-top: 40px; font-family: 'Dancing Script', cursive; font-size: 1.5rem; color: var(--gold-color); }
 
         .modal-section { margin-bottom: 25px; }
-        .modal-h3 { font-family: var(--font-serif); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-light); margin-bottom: 10px; display: flex; align-items: center; }
-        .modal-h3 i { margin-right: 10px; }
+        .modal-h3 { font-family: var(--font-serif); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 2px; color: var(--gold-light); margin-bottom: 15px; display: flex; align-items: center; border-left: 3px solid var(--gold-color); padding-left: 10px; }
         .modal-text { font-family: var(--font-body); font-size: 0.95rem; line-height: 1.6; color: #ddd; font-weight: 300; text-align: justify; }
-        .timeline-item { display: flex; gap: 15px; margin-bottom: 10px; }
-        .time { font-family: var(--font-body); font-weight: bold; color: var(--gold-color); min-width: 60px; }
-        .activity { font-family: var(--font-body); color: #eee; }
+        .timeline-item { display: flex; gap: 15px; margin-bottom: 12px; }
+        .time { font-family: var(--font-body); font-weight: bold; color: var(--gold-color); min-width: 60px; font-size: 0.9rem;}
+        .activity { font-family: var(--font-body); color: #eee; font-size: 0.95rem; }
 
         .album-art {
             width: 50px; height: 50px; border-radius: 50%;
@@ -253,13 +239,13 @@
                 <ul class="features">
                     <li>Có xe riêng đưa đón tận nơi (2 chiều)</li>
                     <li>Gội đầu dưỡng sinh Couple (Partner Spa)</li>
-                    <li><strong>Bao gồm: Combo 3 món ăn tối</strong></li>
-                    <li>Thưởng thức Rượu mật nho Ninh Thuận</li>
+                    <li>Set Menu 3 món (Ăn tối)</li>
+                    <li>Thưởng thức Rượu Vang nho Ninh Thuận</li>
                     <li>Dạo phố & Nghe nhạc Lofi trên xe</li>
                 </ul>
             </div>
             <div class="btn-group">
-                <button onclick="openModal('modal-chill')" class="btn btn-detail">Xem chi tiết & Menu</button>
+                <button onclick="openModal('modal-chill')" class="btn btn-detail">View Routine</button>
                 <a href="#" onclick="bookNow('Healing Date')" class="btn btn-cta">Đặt Ngay</a>
             </div>
         </div>
@@ -273,14 +259,14 @@
                 <div class="duration">4.0 Tiếng • Fine Dining Date</div>
                 <ul class="features">
                     <li>Có xe riêng đưa đón tận nơi (2 chiều)</li>
-                    <li><strong>Bao gồm: Set Menu 5 món</strong> (Nhà hàng)</li>
+                    <li>Set Menu 5 món (Nhà hàng View đẹp)</li>
                     <li>Không gian riêng tư & lãng mạn</li>
-                    <li>Thưởng thức Rượu mật nho Ninh Thuận</li>
+                    <li>Thưởng thức Rượu Vang nho Ninh Thuận</li>
                     <li>Tặng ảnh Instax lấy liền kỷ niệm</li>
                 </ul>
             </div>
             <div class="btn-group">
-                <button onclick="openModal('modal-dinner')" class="btn btn-detail">Chọn Style Nhà Hàng</button>
+                <button onclick="openModal('modal-dinner')" class="btn btn-detail">View Routine</button>
                 <a href="#" onclick="bookNow('The Gastronomy')" class="btn btn-cta">Đặt Ngay</a>
             </div>
         </div>
@@ -293,15 +279,15 @@
                 <div class="duration">5.0 Tiếng • Special Occasion</div>
                 <ul class="features">
                     <li>Có xe riêng đưa đón tận nơi (2 chiều)</li>
-                    <li><strong>Bao gồm: Bữa tối VIP Premium</strong></li>
+                    <li>Bữa tối VIP Premium</li>
                     <li>Kịch bản Cầu hôn/Kỷ niệm bí mật</li>
                     <li>Trang trí cốp xe (Hoa tươi + LED)</li>
-                    <li>Tặng 01 chai Rượu mật nho Signature</li>
+                    <li>Tặng 01 chai Rượu Vang nho Signature</li>
                     <li>Quay video/Chụp ảnh chuyên nghiệp</li>
                 </ul>
             </div>
             <div class="btn-group">
-                <button onclick="openModal('modal-special')" class="btn btn-detail">Xem kịch bản</button>
+                <button onclick="openModal('modal-special')" class="btn btn-detail">View Routine</button>
                 <a href="#" onclick="bookNow('The Anniversary')" class="btn btn-cta">Tư vấn ngay</a>
             </div>
         </div>
@@ -335,7 +321,7 @@
                 <br><br>
                 Tụi mình hiểu rằng sự sang trọng nằm ở <b>sự tinh tế (subtlety)</b>:
                 <br>✦ Là playlist nhạc được set đúng gu.
-                <br>✦ Là hương vị Rượu mật nho Ninh Thuận ngọt ngào.
+                <br>✦ Là hương vị <i>Vang nho trứ danh từ vùng đất nắng gió Ninh Thuận</i> - được ủ men thủ công giữ trọn vị ngọt thanh.
                 <br>✦ Là lộ trình ngắm thành phố ở góc đẹp nhất mà ít người biết.
             </p>
 
@@ -352,20 +338,20 @@
             <div class="modal-title">Healing Date</div>
             <div class="modal-subtitle">"Thư giãn, Ăn ngon & Chữa lành"</div>
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-solid fa-book-open"></i> Câu chuyện gói này</div>
+                <div class="modal-h3">The Concept</div>
                 <p class="modal-text">Dành cho những ngày cả hai đều mệt nhoài vì công việc. Loveroutes đưa bạn đi gội đầu thư giãn, sau đó thưởng thức bữa tối ấm cúng tại quán ngon mà chúng mình đã chọn lọc kỹ.</p>
             </div>
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-regular fa-clock"></i> Timeline lãng mạn (4 Tiếng)</div>
+                <div class="modal-h3">The Routine (4 Tiếng)</div>
                 <div class="timeline-item"><span class="time">17:00</span><span class="activity">Xe riêng đón Chàng tại nhà.</span></div>
-                <div class="timeline-item"><span class="time">17:30</span><span class="activity">Qua đón Nàng. Mời dùng Rượu mật nho khai vị trên xe.</span></div>
+                <div class="timeline-item"><span class="time">17:30</span><span class="activity">Qua đón Nàng. Tasting <b>Rượu Vang nho Ninh Thuận</b> khai vị trên xe.</span></div>
                 <div class="timeline-item"><span class="time">18:00</span><span class="activity">Đến Spa (Partner). Gội đầu dưỡng sinh Couple thư giãn.</span></div>
-                <div class="timeline-item"><span class="time">19:30</span><span class="activity">Di chuyển đi ăn tối (Combo 3 món đã đặt sẵn).</span></div>
+                <div class="timeline-item"><span class="time">19:30</span><span class="activity">Di chuyển đi ăn tối (Set Menu 3 món đã đặt sẵn).</span></div>
                 <div class="timeline-item"><span class="time">21:00</span><span class="activity">Đưa hai bạn về nhà an toàn.</span></div>
             </div>
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-solid fa-gift"></i> Menu bao gồm</div>
-                <p class="modal-text">✦ Suất ăn tối Combo 3 món (Món chính + Món nước + Tráng miệng).<br>✦ Rượu mật nho Ninh Thuận (Signature).<br>✦ Khăn lạnh & Nước suối.</p>
+                <div class="modal-h3">Inclusions</div>
+                <p class="modal-text">✦ Suất ăn tối Set Menu 3 món (Món chính + Món nước + Tráng miệng).<br>✦ Rượu Vang nho Ninh Thuận (Ủ thủ công).<br>✦ Khăn lạnh & Nước suối.</p>
             </div>
         </div>
     </div>
@@ -377,14 +363,14 @@
             <div class="modal-subtitle">"Hương vị tình yêu & Kịch bản hoàn mỹ"</div>
             
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-solid fa-star"></i> Điểm nhấn dịch vụ</div>
-                <p class="modal-text">Gói Signature dành cho những buổi tối không thể qua loa. Loveroutes thay bạn đặt chiếc bàn đẹp nhất, chuẩn bị thực đơn 5 món thịnh soạn. Bạn chỉ việc đến và thưởng thức.</p>
+                <div class="modal-h3">Signature Touch</div>
+                <p class="modal-text">Gói Signature dành cho những buổi tối không thể qua loa. Loveroutes thay bạn đặt chiếc bàn có view đẹp nhất, chuẩn bị hoa hồng và đưa đón hai bạn như những ngôi sao điện ảnh. Việc của bạn chỉ là thưởng thức.</p>
             </div>
 
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-solid fa-utensils"></i> Chọn Style Ăn Tối (Đã bao gồm)</div>
+                <div class="modal-h3">The Menu (Your Choice)</div>
                 <p class="modal-text" style="font-style: italic; font-size: 0.85rem; margin-bottom: 10px;">
-                    *Bạn chọn phong cách, Loveroutes chọn quán ngon nhất:
+                    *Bạn chọn phong cách ẩm thực, Loveroutes lo liệu nhà hàng:
                 </p>
 
                 <div class="restaurant-list">
@@ -394,7 +380,7 @@
                         </button>
                         <div id="res-1" class="res-detail">
                             <ul>
-                                <li>Set Menu: Salad, Soup, Beefsteak (Moo/El Gaucho style), Pasta & Dessert.</li>
+                                <li>Menu: Salad, Soup, Beefsteak (Moo/El Gaucho style), Pasta & Dessert.</li>
                                 <li>Không gian: Ấm cúng, ánh đèn vàng lãng mạn.</li>
                             </ul>
                         </div>
@@ -406,7 +392,7 @@
                         </button>
                         <div id="res-2" class="res-detail">
                             <ul>
-                                <li>Set Menu: Sashimi, Sushi Roll, Tempura, Lẩu giấy & Mochi.</li>
+                                <li>Menu: Sashimi, Sushi Roll, Tempura, Lẩu giấy & Mochi.</li>
                                 <li>Không gian: Riêng tư, tinh tế.</li>
                             </ul>
                         </div>
@@ -415,9 +401,9 @@
             </div>
 
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-regular fa-clock"></i> Timeline lãng mạn (4 Tiếng)</div>
+                <div class="modal-h3">The Routine (4 Tiếng)</div>
                 <div class="timeline-item"><span class="time">18:00</span><span class="activity">Xe đón Chàng & Nàng. Tặng hoa tươi (nếu đặt trước).</span></div>
-                <div class="timeline-item"><span class="time">18:30</span><span class="activity">Thưởng thức Rượu mật nho Ninh Thuận trên đường đi.</span></div>
+                <div class="timeline-item"><span class="time">18:30</span><span class="activity">Thưởng thức <b>Rượu Vang nho Ninh Thuận</b> nồng nàn trên đường đi.</span></div>
                 <div class="timeline-item"><span class="time">19:00</span><span class="activity">Check-in nhà hàng. Thưởng thức Set Menu 5 món.</span></div>
                 <div class="timeline-item"><span class="time">21:00</span><span class="activity">Xe đón đi hóng gió đêm hoặc đưa về tận nơi.</span></div>
             </div>
@@ -430,19 +416,19 @@
             <div class="modal-title">The Anniversary</div>
             <div class="modal-subtitle">"Khoảnh khắc khắc cốt ghi tâm"</div>
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-solid fa-book-open"></i> Câu chuyện gói này</div>
+                <div class="modal-h3">The Concept</div>
                 <p class="modal-text">Dành cho những dịp trọng đại: Cầu hôn, Kỷ niệm ngày cưới. LoveRoute sẽ biến chiếc xe thành một không gian bất ngờ với hoa và quà ở cốp sau, cùng bữa tối VIP đẳng cấp nhất.</p>
             </div>
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-regular fa-clock"></i> Timeline mẫu (5 Tiếng)</div>
+                <div class="modal-h3">The Routine (5 Tiếng)</div>
                 <div class="timeline-item"><span class="time">Chiều</span><span class="activity">Team Setup bí mật trang trí cốp xe (Hoa & LED).</span></div>
                 <div class="timeline-item"><span class="time">18:00</span><span class="activity">Đón cặp đôi đi ăn tối (Menu Premium VIP).</span></div>
-                <div class="timeline-item"><span class="time">20:30</span><span class="activity"><b>BẤT NGỜ:</b> Dừng xe tại điểm view đẹp, mở cốp -> Trao quà.</span></div>
+                <div class="timeline-item"><span class="time">20:30</span><span class="activity"><b>SURPRISE MOMENT:</b> Dừng xe tại điểm view đẹp, mở cốp -> Trao quà.</span></div>
                 <div class="timeline-item"><span class="time">21:00</span><span class="activity">Media quay video/chụp ảnh khoảnh khắc hạnh phúc.</span></div>
             </div>
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-solid fa-gem"></i> Đặc quyền VIP</div>
-                <p class="modal-text">✦ Tặng 01 chai Rượu mật nho Signature (Take away).<br>✦ Bữa tối Premium đã bao gồm.<br>✦ Media chuyên nghiệp đi cùng.</p>
+                <div class="modal-h3">Inclusions</div>
+                <p class="modal-text">✦ Tặng 01 chai Rượu Vang nho Ninh Thuận (Signature) mang về.<br>✦ Bữa tối Premium đã bao gồm.<br>✦ Media chuyên nghiệp đi cùng.</p>
             </div>
         </div>
     </div>
