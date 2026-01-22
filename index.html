@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoveRoute - Private Date Chauffeur</title>
+    <title>LoveRoute - Curators of Romance</title>
     <link rel="icon" type="image/png" href="logo.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,71 +118,60 @@
 
         /* --- MODAL (POPUP) --- */
         .modal {
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%;
-            background-color: rgba(0, 31, 63, 0.95); 
-            z-index: 10000; 
-            
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 31, 63, 0.95); z-index: 10000; 
             /* Flexbox căn giữa */
-            display: none; 
-            align-items: center; 
-            justify-content: center;
-            
-            opacity: 0; 
-            transition: opacity 0.3s ease;
+            display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease;
             backdrop-filter: blur(5px);
         }
-        
-        .modal.show {
-            display: flex; /* Quan trọng: Flex để căn giữa */
-            opacity: 1;
-        }
+        .modal.show { display: flex; opacity: 1; }
 
         .modal-content {
-            background: #0B1026; 
-            border: 1px solid var(--gold-color);
-            width: 90%; 
-            max-width: 600px; 
-            max-height: 85vh; 
-            border-radius: 15px; 
-            padding: 40px; 
-            position: relative;
-            overflow-y: auto; 
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-            margin: auto; /* Đảm bảo không bị lệch */
-            
-            transform: translateY(30px); 
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: #0B1026; border: 1px solid var(--gold-color);
+            width: 90%; max-width: 600px; max-height: 85vh; 
+            border-radius: 15px; padding: 40px; position: relative;
+            overflow-y: auto; box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            margin: auto; 
+            transform: translateY(30px); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        .modal.show .modal-content { transform: translateY(0); }
+
+        /* --- CSS CHO DANH SÁCH NHÀ HÀNG (ACCORDION) --- */
+        .restaurant-list { margin-top: 10px; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 10px; overflow: hidden; }
+        .res-item { border-bottom: 1px solid rgba(212, 175, 55, 0.1); }
+        .res-item:last-child { border-bottom: none; }
         
-        .modal.show .modal-content { 
-            transform: translateY(0); 
+        .res-toggle {
+            width: 100%; background: rgba(255, 255, 255, 0.05); color: var(--gold-color);
+            border: none; padding: 15px; text-align: left; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: var(--font-body); font-weight: 600; font-size: 0.95rem;
+            transition: all 0.3s;
         }
+        .res-toggle:hover { background: rgba(212, 175, 55, 0.1); }
+        
+        .res-detail {
+            display: none; /* Mặc định ẩn */
+            padding: 15px; background: rgba(0, 0, 0, 0.2);
+            color: #ddd; font-size: 0.9rem; line-height: 1.6;
+        }
+        .res-detail ul { padding-left: 20px; margin: 0; }
+        .res-detail li { margin-bottom: 8px; }
+        .res-detail.open { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* --- MUSIC PLAYER --- */
         .music-player {
-            position: fixed; 
-            bottom: 20px; /* Vị trí chuẩn khi hiện */
-            left: 50%; 
-            transform: translateX(-50%);
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             width: 95%; max-width: 450px;
-            background: rgba(0, 31, 63, 0.95); 
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(212, 175, 55, 0.4); 
-            border-radius: 50px;
-            padding: 12px 25px; 
-            display: flex; align-items: center; gap: 15px;
-            z-index: 9999; 
-            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-            
-            /* Hiệu ứng trượt */
+            background: rgba(0, 31, 63, 0.95); backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 50px;
+            padding: 12px 25px; display: flex; align-items: center; gap: 15px;
+            z-index: 9999; box-shadow: 0 15px 40px rgba(0,0,0,0.7);
             transition: bottom 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .music-player.hidden { 
-            bottom: -150px; /* Vị trí khi ẩn */
-        }
+        .music-player.hidden { bottom: -150px; }
         
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #fff; cursor: pointer; background: none; border: none; }
         
@@ -233,7 +222,7 @@
 
     <header>
         <div class="logo">LoveRoute</div>
-        <div class="slogan">Private Date Chauffeur</div>
+        <div class="slogan">Curators of Romance</div>
         
         <nav class="nav-menu">
             <a onclick="openModal('modal-about')" class="nav-link">Về chúng tôi</a>
@@ -245,7 +234,8 @@
     <section style="max-width: 900px; margin: 0 auto 50px auto; padding: 0 25px; text-align: center; position: relative; z-index: 2;">
         <div style="font-family: 'Playfair Display', serif; font-size: 1.15rem; line-height: 1.9; color: #e0e0e0; font-style: italic; font-weight: 400;">
             “Đừng để áp lực 'đi đâu, ăn gì' làm nguội mất nhịp yêu. <br>
-            <span style="color: var(--gold-color); font-weight: 700;">Loveroutes</span> là Date Planner cá nhân của bạn – người thầm lặng thiết kế từng khoảnh khắc để buổi hẹn hò trở về đúng nghĩa: Chỉ có sự riêng tư, sự tận hưởng và những khoảnh khắc rung động trọn vẹn bên người quan trọng nhất.”
+            <span style="color: var(--gold-color); font-weight: 700;">Loveroutes</span> là Date Planner cá nhân của bạn – người thầm lặng thiết kế từng khoảnh khắc để buổi hẹn hò trở về đúng nghĩa: <br>
+            Chỉ có sự riêng tư, sự tận hưởng và những rung động trọn vẹn bên người quan trọng nhất.”
         </div>
         <div style="color: var(--gold-color); font-size: 1.5rem; margin-top: 25px; opacity: 0.8;">✦</div>
     </section>
@@ -253,71 +243,69 @@
     <div class="container">
         <div class="card">
             <div>
-                <h3>Chill Dinner</h3>
-                <div class="price">989.000đ</div>
-                <div class="duration">5.0 Tiếng • Time for us</div>
+                <h3>Healing Touch</h3>
+                <div class="price">1.190.000đ</div>
+                <div class="duration">3.5 Tiếng • Relax & Recharge</div>
                 <ul class="features">
-                    <li>Xe VF6 đời mới riêng tư & sạch sẽ</li>
-                    <li>Lựa chọn list nhạc riêng theo yêu cầu</li>
-                    <li>Free photobooth</li>
-                    <li>Một bó hoa tình iu nhỏ</li>
-                    <li>Menu Fine Dinning 4 món tại nhà hàng trong list </li>
-                    <li>Lộ trình ngắm cảnh đẹp</li>
+                    <li>Xe VF6 Private đưa đón tận nơi</li>
+                    <li><strong>Gói Gội đầu dưỡng sinh Couple</strong> (Đã bao gồm)</li>
+                    <li>Không gian Spa đối tác yên tĩnh</li>
+                    <li>Chờ đợi miễn phí 90 phút</li>
+                    <li>City Tour nhẹ nhàng sau khi Spa</li>
+                    <li>Nước detox & Khăn lạnh trên xe</li>
                 </ul>
             </div>
             <div class="btn-group">
-                <button onclick="openModal('modal-chill')" class="btn btn-detail">Xem chi tiết & Lịch trình</button>
-                <a href="#" onclick="bookNow('Chill Drive')" class="btn btn-cta">Đặt Ngay</a>
+                <button onclick="openModal('modal-chill')" class="btn btn-detail">Xem chi tiết</button>
+                <a href="#" onclick="bookNow('Healing Touch')" class="btn btn-cta">Đặt Ngay</a>
             </div>
         </div>
 
         <div class="card featured">
-            <div class="badge">Phổ biến nhất</div>
+            <div class="badge">Signature</div>
             <div>
-                <h3>Dinner Date</h3>
-                <div class="original-price">2.300.000đ</div>
-                <div class="price">1.990.000đ</div>
-                <div class="duration">6.0 Tiếng • Fine Dinning</div>
+                <h3>The Gastronomy</h3>
+                <div class="original-price">2.200.000đ</div>
+                <div class="price">1.890.000đ</div>
+                <div class="duration">6.0 Tiếng • Fine Dining Date</div>
                 <ul class="features">
-                    <li><strong>Tất cả quyền lợi gói Chill</strong></li>
-                    <li>Chờ đợi miễn phí khi ăn tối</li>
-                    <li>Đưa đón tận cửa nhà hàng</li>
-                    <li>Menu Fine Dinning 6 món tại nhà hàng trong list</li>
-                    <li>Một bó hoa tình iu bự</li>
-                    <li>Chụp ảnh in lấy liền</li>
+                    <li><strong>Dịch vụ Booking bàn VIP</strong> (View đẹp nhất)</li>
+                    <li>Đưa đón tận sảnh nhà hàng sang trọng</li>
+                    <li>Ưu đãi/Tặng món từ Partner nhà hàng</li>
+                    <li>Chờ đợi miễn phí khi dùng bữa (2H)</li>
+                    <li>Chụp ảnh in lấy liền (Instax) tặng kèm</li>
+                    <li>Tặng hoa hồng sáp trên xe</li>
                 </ul>
             </div>
             <div class="btn-group">
-                <button onclick="openModal('modal-dinner')" class="btn btn-detail">Xem chi tiết & Lịch trình</button>
-                <a href="#" onclick="bookNow('Dinner Date')" class="btn btn-cta">Đặt Ngay</a>
+                <button onclick="openModal('modal-dinner')" class="btn btn-detail">Chọn Nhà Hàng & Lịch trình</button>
+                <a href="#" onclick="bookNow('The Gastronomy')" class="btn btn-cta">Đặt Ngay</a>
             </div>
         </div>
 
         <div class="card">
             <div>
-                <h3>The Special</h3>
-                <div class="original-price">3.600.000đ</div>
+                <h3>The Anniversary</h3>
                 <div class="price">2.890.000đ</div>
-                <div class="duration">6 Tiếng • Anniversary</div>
+                <div class="duration">6 Tiếng • Special Occasion</div>
                 <ul class="features">
-                    <li><strong>Trọn gói dịch vụ VIP</strong></li>
-                    <li>Trang trí xe hoa/đèn LED (Cốp sau)</li>
-                    <li>Tặng 01 chai rượu trái cây lên men</li>
-                    <li>Hỗ trợ lên kế hoạch theo yêu cầu</li>
-                    <li>Lộ trình riêng theo yêu cầu</li>
-                    <li>Thời gian linh hoạt thoải mái</li>
+                    <li><strong>Kịch bản Cầu hôn/Kỷ niệm A-Z</strong></li>
+                    <li>Trang trí cốp xe (Hoa tươi + LED + Ảnh)</li>
+                    <li>Tặng 01 chai Rượu Sparkling cao cấp</li>
+                    <li>Quay video/Chụp ảnh kỷ niệm chuyên nghiệp</li>
+                    <li>Lộ trình riêng & Thời gian linh hoạt</li>
+                    <li>Hỗ trợ đặt bánh kem/quà bất ngờ</li>
                 </ul>
             </div>
             <div class="btn-group">
-                <button onclick="openModal('modal-special')" class="btn btn-detail">Xem chi tiết & Lịch trình</button>
-                <a href="#" onclick="bookNow('The Special')" class="btn btn-cta">Tư vấn ngay</a>
+                <button onclick="openModal('modal-special')" class="btn btn-detail">Xem chi tiết</button>
+                <a href="#" onclick="bookNow('The Anniversary')" class="btn btn-cta">Tư vấn ngay</a>
             </div>
         </div>
     </div>
 
     <section id="booking-calendar" class="calendar-section">
         <h2 class="calendar-title">Kiểm tra lịch trống</h2>
-        
         <div class="calendly-container">
             <div class="calendly-inline-widget" data-url="https://calendly.com/trieungo201/t-v-n-d-t-l-ch-loveroutes" style="min-width:320px;height:630px;"></div>
             <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
@@ -327,34 +315,26 @@
     <div id="modal-about" class="modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal('modal-about')">&times;</button>
-            
             <div class="modal-title" style="font-size: 1.8rem;">Loveroutes</div>
             <div class="modal-subtitle">"Curators of Romance – Những kẻ giám tuyển chuyện tình"</div>
 
             <span class="about-highlight">01. Tại sao lại là Loveroutes?</span>
             <p class="about-text">
-                Gen Z chúng mình hay nói về "healing", về những cuộc trốn chạy khỏi deadline và khói bụi. Nhưng thú thật đi, hẹn hò ở Sài Gòn đôi khi... hơi mệt. 
+                Gen Z chúng mình hay nói về "healing", về những cuộc trốn chạy khỏi deadline. Nhưng thú thật đi, hẹn hò ở Sài Gòn đôi khi... hơi mệt. 
                 <br><br>
-                Là cảm giác háo hức lên đồ (outfit) thật đẹp, nhưng rồi mood tụt dần vì kẹt xe ở ngã tư, vì loay hoay tìm chỗ đậu, hay đơn giản là không biết "tối nay ăn gì?".
+                Là cảm giác háo hức lên đồ (outfit) thật đẹp, nhưng rồi mood tụt dần vì kẹt xe, vì loay hoay tìm chỗ đậu, hay đơn giản là không biết "tối nay ăn gì?".
                 <br>
-                Loveroutes ra đời không phải để chở bạn đi. Chúng mình ở đây để <b>trả lại cho bạn sự thảnh thơi</b>. Để trong suốt buổi tối ấy, việc duy nhất bạn cần bận tâm là: <i>"Người ngồi cạnh mình hôm nay cười xinh thế nào."</i>
+                Loveroutes ra đời để <b>trả lại cho bạn sự thảnh thơi</b>. Để trong suốt buổi tối ấy, việc duy nhất bạn cần bận tâm là: <i>"Người ngồi cạnh mình hôm nay cười xinh thế nào."</i>
             </p>
 
             <span class="about-highlight">02. Không phải Tài xế, là "Date Planner"</span>
             <p class="about-text">
                 Đừng gọi tụi mình là dịch vụ xe đưa đón. Hãy coi Loveroutes là người bạn thầm lặng, người giúp bạn viết nên kịch bản (script) cho buổi hẹn hoàn hảo.
                 <br><br>
-                Tụi mình hiểu rằng sự sang trọng không nằm ở sự phô trương. Nó nằm ở <b>sự tinh tế (subtlety)</b>:
-                <br>✦ Là playlist nhạc được set đúng gu của hai bạn.
-                <br>✦ Là nhiệt độ xe vừa đủ ấm, mùi hương nhẹ nhàng dễ chịu.
-                <br>✦ Là lộ trình được thiết kế riêng để ngắm thành phố ở góc đẹp nhất mà ít người biết.
-            </p>
-
-            <span class="about-highlight">03. Một chiếc "Private Hideout" di động</span>
-            <p class="about-text">
-                Trên chiếc VF 6 êm ái, cánh cửa đóng lại là thế giới ồn ào bên ngoài dừng lại. Đây là <b>không gian thứ 3</b> – nơi chỉ có hai tần số cảm xúc giao nhau.
-                <br><br>
-                Bạn cứ việc tận hưởng những cái nắm tay, những câu chuyện không đầu không cuối. Còn đường đi lối về, nhà hàng hay những món quà bất ngờ... hãy để Loveroutes lo liệu.
+                Tụi mình hiểu rằng sự sang trọng nằm ở <b>sự tinh tế (subtlety)</b>:
+                <br>✦ Là playlist nhạc được set đúng gu.
+                <br>✦ Là nhiệt độ xe vừa đủ ấm, mùi hương nhẹ nhàng.
+                <br>✦ Là lộ trình ngắm thành phố ở góc đẹp nhất mà ít người biết.
             </p>
 
             <div class="signature">
@@ -367,22 +347,22 @@
     <div id="modal-chill" class="modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal('modal-chill')">&times;</button>
-            <div class="modal-title">Chill Drive</div>
-            <div class="modal-subtitle">"Khoảng lặng êm đềm sau giờ tan tầm"</div>
+            <div class="modal-title">Healing Touch</div>
+            <div class="modal-subtitle">"Thư giãn & Chữa lành"</div>
             <div class="modal-section">
                 <div class="modal-h3"><i class="fa-solid fa-book-open"></i> Câu chuyện gói này</div>
-                <p class="modal-text">Gói dịch vụ cơ bản nhất nhưng mang đậm triết lý của LoveRoute. Dành cho những cặp đôi muốn trốn khỏi tiếng ồn ào của phố thị, ngồi tựa vào nhau trên chiếc xe êm ái, nghe một bản nhạc Jazz và ngắm Sài Gòn lung linh qua khung cửa kính. Không cần đích đến, chính hành trình là một món quà.</p>
+                <p class="modal-text">Dành cho những ngày cả hai đều mệt nhoài vì công việc. Không cần nói nhiều, chỉ cần nắm tay nhau đi trốn. Loveroutes đưa bạn đến Spa đối tác uy tín để gội đầu dưỡng sinh thư giãn, sau đó là những vòng xe êm đềm ngắm phố đêm.</p>
             </div>
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-regular fa-clock"></i> Timeline gợi ý (2.5 Tiếng)</div>
-                <div class="timeline-item"><span class="time">00:00</span><span class="activity">Đón khách tận nơi. Tài xế mở cửa, mời nước & khăn lạnh.</span></div>
-                <div class="timeline-item"><span class="time">00:30</span><span class="activity">Dạo quanh cung đường "Metropole Thủ Thiêm" ngắm view Quận 1.</span></div>
-                <div class="timeline-item"><span class="time">01:15</span><span class="activity">Di chuyển qua Cầu Ba Son, vòng quanh Nhà Thờ Đức Bà & Bưu Điện.</span></div>
-                <div class="timeline-item"><span class="time">02:30</span><span class="activity">Trả khách về điểm ban đầu an toàn.</span></div>
+                <div class="modal-h3"><i class="fa-regular fa-clock"></i> Timeline (3.5 Tiếng)</div>
+                <div class="timeline-item"><span class="time">00:00</span><span class="activity">Đón khách. Thưởng thức trà thảo mộc trên xe.</span></div>
+                <div class="timeline-item"><span class="time">00:30</span><span class="activity">Đến Spa (Partner). Tận hưởng Gội đầu dưỡng sinh (60-90p).</span></div>
+                <div class="timeline-item"><span class="time">02:00</span><span class="activity">Tài xế đón & đưa đi dạo quanh cung đường đẹp nhất Sài Gòn.</span></div>
+                <div class="timeline-item"><span class="time">03:30</span><span class="activity">Về nhà an toàn, nạp đầy năng lượng.</span></div>
             </div>
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-solid fa-gift"></i> Tiện ích đi kèm</div>
-                <p class="modal-text">✦ Nước suối Lavie/Aquafina (bỏ nhãn).<br>✦ Khăn ướt tiệt trùng.<br>✦ Dù che mưa cỡ lớn (nếu trời mưa).<br>✦ Quyền chọn nhạc qua Spotify trên xe.</p>
+                <div class="modal-h3"><i class="fa-solid fa-gift"></i> Tiện ích</div>
+                <p class="modal-text">✦ Đã bao gồm chi phí Spa cho 2 người.<br>✦ Nước suối & Khăn ướt.<br>✦ Playlist nhạc Lofi/Acoustic chữa lành.</p>
             </div>
         </div>
     </div>
@@ -390,22 +370,67 @@
     <div id="modal-dinner" class="modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal('modal-dinner')">&times;</button>
-            <div class="modal-title">Dinner Date</div>
-            <div class="modal-subtitle">"Bữa tối trọn vẹn cảm xúc"</div>
+            <div class="modal-title">The Gastronomy</div>
+            <div class="modal-subtitle">"Hương vị tình yêu & Kịch bản hoàn mỹ"</div>
+            
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-solid fa-book-open"></i> Câu chuyện gói này</div>
-                <p class="modal-text">Đừng để việc tìm chỗ đậu xe hay kẹt xe làm hỏng tâm trạng trước bữa tối lãng mạn. Với Dinner Date, chúng tôi đưa bạn đến tận cửa nhà hàng như những VIP thực thụ và kiên nhẫn chờ đợi đến khi bạn dùng bữa xong để tiếp tục hành trình hóng gió đêm.</p>
+                <div class="modal-h3"><i class="fa-solid fa-star"></i> Điểm nhấn dịch vụ</div>
+                <p class="modal-text">Gói Signature dành cho những buổi tối không thể qua loa. Loveroutes thay bạn đặt chiếc bàn có view đẹp nhất, chuẩn bị hoa hồng và đưa đón hai bạn như những ngôi sao điện ảnh. Việc của bạn chỉ là thưởng thức.</p>
             </div>
+
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-regular fa-clock"></i> Timeline gợi ý (4 Tiếng)</div>
-                <div class="timeline-item"><span class="time">18:00</span><span class="activity">Đón khách. Thưởng thức snack nhẹ trên xe.</span></div>
-                <div class="timeline-item"><span class="time">18:30</span><span class="activity">Đưa đến nhà hàng. Tài xế hỗ trợ mở cửa và chờ đợi tại bãi xe.</span></div>
-                <div class="timeline-item"><span class="time">18:30</span><span class="activity"><i>(Thời gian chờ khách ăn tối khoảng 1.5 - 2 tiếng)</i></span></div>
-                <div class="timeline-item"><span class="time">20:30</span><span class="activity">Đón khách sau bữa tối. Tiếp tục lộ trình hóng gió đêm mát rượi.</span></div>
-            </div>
+                <div class="modal-h3"><i class="fa-solid fa-utensils"></i> Chọn phong cách nhà hàng (Partner)</div>
+                <p class="modal-text" style="font-style: italic; font-size: 0.85rem; margin-bottom: 10px;">
+                    *Loveroutes hỗ trợ book bàn VIP & nhận ưu đãi đặc biệt tại các địa điểm sau:
+                </p>
+
+                <div class="restaurant-list">
+                    <div class="res-item">
+                        <button class="res-toggle" onclick="toggleRes('res-1')">
+                            <span>🥩 Âu & Steak (Fine Dining)</span> <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="res-1" class="res-detail">
+                            <ul>
+                                <li><strong>Moo Beef Steak (Q1):</strong> Không gian ấm cúng, sang trọng. <em>(Ưu đãi: Tặng món tráng miệng)</em></li>
+                                <li><strong>The Log (Gem Center):</strong> Nhà hàng gỗ trên cao, piano sống.</li>
+                                <li><strong>El Gaucho:</strong> Steak đẳng cấp Argentina.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="res-item">
+                        <button class="res-toggle" onclick="toggleRes('res-2')">
+                            <span>🌊 View Sông Sài Gòn (Romantic)</span> <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="res-2" class="res-detail">
+                            <ul>
+                                <li><strong>The Deck Saigon:</strong> Sát bờ sông, ngắm hoàng hôn cực phẩm.</li>
+                                <li><strong>Clay (Thảo Điền):</strong> Địa trung hải, thoáng mát, chill.</li>
+                                <li><strong>Ros Yacht Club:</strong> Bến du thuyền Bạch Đằng, view Landmark.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="res-item">
+                        <button class="res-toggle" onclick="toggleRes('res-3')">
+                            <span>🍣 Nhật Bản & Omakase</span> <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="res-3" class="res-detail">
+                            <ul>
+                                <li><strong>Sushi Rei:</strong> Omakase riêng tư, tinh tế.</li>
+                                <li><strong>Sorae Sushi (Tầng 24):</strong> View toàn thành phố trên cao.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
             <div class="modal-section">
-                <div class="modal-h3"><i class="fa-solid fa-utensils"></i> Gợi ý nhà hàng (LoveRoute Partner)</div>
-                <p class="modal-text">Chúng tôi có thể chở bạn đến bất kỳ đâu, nhưng đây là vài gợi ý lãng mạn:<br>✦ The Deck Saigon (Thảo Điền) - View sông.<br>✦ Clay (Thảo Điền) - Địa trung hải.<br>✦ Pizza 4P's (Các chi nhánh view đẹp).</p>
+                <div class="modal-h3"><i class="fa-regular fa-clock"></i> Timeline (6 Tiếng)</div>
+                <div class="timeline-item"><span class="time">17:30</span><span class="activity">Đón khách. Tặng bó hoa tươi chuẩn bị sẵn.</span></div>
+                <div class="timeline-item"><span class="time">18:00</span><span class="activity">Check-in nhà hàng (Đã book trước). Tài xế chờ.</span></div>
+                <div class="timeline-item"><span class="time">20:30</span><span class="activity">Đón khách đi dạo phố/hóng gió đêm/Bar nhẹ.</span></div>
+                <div class="timeline-item"><span class="time">22:00</span><span class="activity">Kết thúc hành trình.</span></div>
             </div>
         </div>
     </div>
@@ -413,7 +438,7 @@
     <div id="modal-special" class="modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal('modal-special')">&times;</button>
-            <div class="modal-title">The Special</div>
+            <div class="modal-title">The Anniversary</div>
             <div class="modal-subtitle">"Khoảnh khắc khắc cốt ghi tâm"</div>
             <div class="modal-section">
                 <div class="modal-h3"><i class="fa-solid fa-book-open"></i> Câu chuyện gói này</div>
@@ -457,37 +482,27 @@
             window.open(`https://zalo.me/${ZALO_NUMBER}`, '_blank'); 
         }
 
-        // 2. KHAI BÁO BIẾN DÙNG CHUNG (Để tránh lỗi mất thanh nhạc)
+        // 2. KHAI BÁO BIẾN DÙNG CHUNG
         const playerEl = document.getElementById('music-player');
         
         // 3. MODAL LOGIC & PLAYER CONTROL
         function openModal(modalId) {
-            // Hiện Modal
             document.getElementById(modalId).classList.add('show');
-            // ĐÃ BỎ LỆNH: document.body.style.overflow = 'hidden'; (Nguyên nhân gây lệch màn hình)
-            
-            // Ẩn thanh nhạc xuống (nhạc vẫn hát bình thường)
             if(playerEl) {
                 playerEl.classList.add('hidden');
             }
         }
 
         function closeModal(modalId) {
-            // Ẩn Modal
             document.getElementById(modalId).classList.remove('show');
-            
-            // Hiện lại thanh nhạc
             if(playerEl) {
                 playerEl.classList.remove('hidden');
             }
         }
 
-        // Xử lý khi click ra ngoài vùng Modal để đóng
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.classList.remove('show');
-                
-                // Hiện lại thanh nhạc khi click ra ngoài
                 if(playerEl) {
                     playerEl.classList.remove('hidden');
                 }
@@ -516,7 +531,17 @@
         }
         window.addEventListener('resize', initStars); initStars(); drawStars();
 
-        // 5. PLAYLIST NHẠC
+        // 5. LOGIC DANH SÁCH NHÀ HÀNG (ACCORDION)
+        function toggleRes(id) {
+            const allDetails = document.querySelectorAll('.res-detail');
+            allDetails.forEach(el => {
+                if(el.id !== id) el.classList.remove('open');
+            });
+            const element = document.getElementById(id);
+            element.classList.toggle('open');
+        }
+
+        // 6. PLAYLIST NHẠC
         const playlist = [
             { file: 'bai1.mp3', name: 'Vạn vật như muốn ta bên nhau', artist: 'Rio ft. 52Hz' },
             { file: 'bai3.mp3', name: 'Âm thầm bên em', artist: 'Sơn Tùng M-TP' },
@@ -558,7 +583,6 @@
 
         if(playlist.length > 0) loadSong(playlist[0]);
 
-        // QUAN TRỌNG: Lệnh này giúp thanh nhạc trượt lên sau khi web tải xong 1s
         window.addEventListener('load', () => { 
             setTimeout(() => { 
                 if(playerEl) playerEl.classList.remove('hidden'); 
