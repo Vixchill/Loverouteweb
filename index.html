@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- 1. CẤU HÌNH GIAO DIỆN --- */
+        /* --- 1. CẤU HÌNH GIAO DIỆN (GIỮ NGUYÊN) --- */
         :root {
             --bg-color: #001F3F; 
             --gold-color: #D4AF37; 
@@ -235,11 +235,11 @@
                 <h3>Healing Date</h3>
                 <div class="vat-note">Giá đã bao gồm VAT & Trọn gói</div>
                 <div class="price">1.890.000đ</div>
-                <div class="duration">4.0 Tiếng • Relax & Light Dinner</div>
+                <div class="duration">4.0 Tiếng • Relax & Comfort Food</div>
                 <ul class="features">
                     <li>Có xe riêng đưa đón tận nơi (2 chiều)</li>
                     <li>Gội đầu dưỡng sinh Couple (Partner Spa)</li>
-                    <li>Set Menu 3 món (Ăn tối)</li>
+                    <li>Comfort Menu (Bữa tối ấm cúng)</li>
                     <li>Thưởng thức Rượu Vang nho Ninh Thuận</li>
                     <li>Dạo phố & Nghe nhạc Lofi trên xe</li>
                 </ul>
@@ -259,7 +259,7 @@
                 <div class="duration">4.0 Tiếng • Fine Dining Date</div>
                 <ul class="features">
                     <li>Có xe riêng đưa đón tận nơi (2 chiều)</li>
-                    <li>Set Menu 5 món (Nhà hàng View đẹp)</li>
+                    <li>5-Course Tasting Menu (Nhà hàng)</li>
                     <li>Không gian riêng tư & lãng mạn</li>
                     <li>Thưởng thức Rượu Vang nho Ninh Thuận</li>
                     <li>Tặng ảnh Instax lấy liền kỷ niệm</li>
@@ -279,11 +279,11 @@
                 <div class="duration">5.0 Tiếng • Special Occasion</div>
                 <ul class="features">
                     <li>Có xe riêng đưa đón tận nơi (2 chiều)</li>
-                    <li>Bữa tối VIP Premium</li>
-                    <li>Kịch bản Cầu hôn/Kỷ niệm bí mật</li>
+                    <li><strong>Chef's Signature Omakase/Menu</strong></li>
+                    <li>Bàn VIP View đẹp nhất (Private)</li>
                     <li>Trang trí cốp xe (Hoa tươi + LED)</li>
                     <li>Tặng 01 chai Rượu Vang nho Signature</li>
-                    <li>Quay video/Chụp ảnh chuyên nghiệp</li>
+                    <li>Media quay/chụp chuyên nghiệp</li>
                 </ul>
             </div>
             <div class="btn-group">
@@ -321,7 +321,7 @@
                 <br><br>
                 Tụi mình hiểu rằng sự sang trọng nằm ở <b>sự tinh tế (subtlety)</b>:
                 <br>✦ Là playlist nhạc được set đúng gu.
-                <br>✦ Là hương vị <i>Vang nho trứ danh từ vùng đất nắng gió Ninh Thuận</i> - được ủ men thủ công giữ trọn vị ngọt thanh.
+                <br>✦ Là hương vị <i>Vang nho trứ danh từ vùng đất nắng gió Ninh Thuận</i> - được ủ men thủ công, ngọt dịu và đượm tình như chính con người nơi đây.
                 <br>✦ Là lộ trình ngắm thành phố ở góc đẹp nhất mà ít người biết.
             </p>
 
@@ -339,19 +339,51 @@
             <div class="modal-subtitle">"Thư giãn, Ăn ngon & Chữa lành"</div>
             <div class="modal-section">
                 <div class="modal-h3">The Concept</div>
-                <p class="modal-text">Dành cho những ngày cả hai đều mệt nhoài vì công việc. Loveroutes đưa bạn đi gội đầu thư giãn, sau đó thưởng thức bữa tối ấm cúng tại quán ngon mà chúng mình đã chọn lọc kỹ.</p>
+                <p class="modal-text">Dành cho những ngày cả hai đều mệt nhoài vì công việc. Loveroutes đưa bạn đi gội đầu thư giãn, sau đó thưởng thức bữa tối "Comfort Food" nhẹ nhàng tại những quán nhỏ yên bình (Hidden Gems).</p>
             </div>
+            
+            <div class="modal-section">
+                <div class="modal-h3">Your Comfort Menu (Choose Style)</div>
+                <p class="modal-text" style="font-style: italic; font-size: 0.85rem; margin-bottom: 10px;">
+                    *Bạn chọn Mood, Loveroutes chọn quán đúng gu:
+                </p>
+                <div class="restaurant-list">
+                    <div class="res-item">
+                        <button class="res-toggle" onclick="toggleRes('h-res-1')">
+                            <span>🌿 Indochine Corner (Việt Nam)</span> <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="h-res-1" class="res-detail">
+                            <ul>
+                                <li>Vibe: Tiệm ăn nhỏ, nhạc Trịnh/Jazz, decor hoài cổ.</li>
+                                <li>Menu: Món Việt thực dưỡng, thanh đạm, ấm bụng.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="res-item">
+                        <button class="res-toggle" onclick="toggleRes('h-res-2')">
+                            <span>🍝 Cozy Bistro (Âu)</span> <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="h-res-2" class="res-detail">
+                            <ul>
+                                <li>Vibe: Ánh đèn vàng, bàn gỗ nhỏ, riêng tư.</li>
+                                <li>Menu: Mỳ ý, Soup kem nấm, Salad tươi.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="modal-section">
                 <div class="modal-h3">The Routine (4 Tiếng)</div>
                 <div class="timeline-item"><span class="time">17:00</span><span class="activity">Xe riêng đón Chàng tại nhà.</span></div>
                 <div class="timeline-item"><span class="time">17:30</span><span class="activity">Qua đón Nàng. Tasting <b>Rượu Vang nho Ninh Thuận</b> khai vị trên xe.</span></div>
                 <div class="timeline-item"><span class="time">18:00</span><span class="activity">Đến Spa (Partner). Gội đầu dưỡng sinh Couple thư giãn.</span></div>
-                <div class="timeline-item"><span class="time">19:30</span><span class="activity">Di chuyển đi ăn tối (Set Menu 3 món đã đặt sẵn).</span></div>
+                <div class="timeline-item"><span class="time">19:30</span><span class="activity">Di chuyển đi ăn tối (Comfort Menu).</span></div>
                 <div class="timeline-item"><span class="time">21:00</span><span class="activity">Đưa hai bạn về nhà an toàn.</span></div>
             </div>
             <div class="modal-section">
                 <div class="modal-h3">Inclusions</div>
-                <p class="modal-text">✦ Suất ăn tối Set Menu 3 món (Món chính + Món nước + Tráng miệng).<br>✦ Rượu Vang nho Ninh Thuận (Ủ thủ công).<br>✦ Khăn lạnh & Nước suối.</p>
+                <p class="modal-text">✦ Comfort Menu (Suất ăn tối ấm cúng).<br>✦ Rượu Vang nho Ninh Thuận (Ủ thủ công).<br>✦ Khăn lạnh & Nước suối.</p>
             </div>
         </div>
     </div>
@@ -364,36 +396,46 @@
             
             <div class="modal-section">
                 <div class="modal-h3">Signature Touch</div>
-                <p class="modal-text">Gói Signature dành cho những buổi tối không thể qua loa. Loveroutes thay bạn đặt chiếc bàn có view đẹp nhất, chuẩn bị hoa hồng và đưa đón hai bạn như những ngôi sao điện ảnh. Việc của bạn chỉ là thưởng thức.</p>
+                <p class="modal-text">Gói Signature dành cho những buổi tối không thể qua loa. Loveroutes thay bạn đặt chiếc bàn có view đẹp nhất, chuẩn bị hoa hồng và đưa đón hai bạn như những ngôi sao điện ảnh.</p>
             </div>
 
             <div class="modal-section">
-                <div class="modal-h3">The Menu (Your Choice)</div>
+                <div class="modal-h3">Your Culinary Journey</div>
                 <p class="modal-text" style="font-style: italic; font-size: 0.85rem; margin-bottom: 10px;">
-                    *Bạn chọn phong cách ẩm thực, Loveroutes lo liệu nhà hàng:
+                    *Bộ sưu tập nhà hàng tuyển chọn của Loveroutes:
                 </p>
 
                 <div class="restaurant-list">
                     <div class="res-item">
-                        <button class="res-toggle" onclick="toggleRes('res-1')">
-                            <span>🥩 Âu & Steak (Cozy Vibes)</span> <i class="fa-solid fa-chevron-down"></i>
+                        <button class="res-toggle" onclick="toggleRes('g-res-1')">
+                            <span>🥩 Steak & Wine (Romantic)</span> <i class="fa-solid fa-chevron-down"></i>
                         </button>
-                        <div id="res-1" class="res-detail">
+                        <div id="g-res-1" class="res-detail">
                             <ul>
-                                <li>Menu: Salad, Soup, Beefsteak (Moo/El Gaucho style), Pasta & Dessert.</li>
-                                <li>Không gian: Ấm cúng, ánh đèn vàng lãng mạn.</li>
+                                <li>Menu: 5-Course Tasting (Salad, Soup, Premium Steak, Pasta, Dessert).</li>
+                                <li>Vibe: Sang trọng, ánh nến lung linh.</li>
                             </ul>
                         </div>
                     </div>
-
                     <div class="res-item">
-                        <button class="res-toggle" onclick="toggleRes('res-2')">
-                            <span>🍣 Fusion & Nhật Bản</span> <i class="fa-solid fa-chevron-down"></i>
+                        <button class="res-toggle" onclick="toggleRes('g-res-2')">
+                            <span>🍣 Modern Asian Fusion</span> <i class="fa-solid fa-chevron-down"></i>
                         </button>
-                        <div id="res-2" class="res-detail">
+                        <div id="g-res-2" class="res-detail">
                             <ul>
-                                <li>Menu: Sashimi, Sushi Roll, Tempura, Lẩu giấy & Mochi.</li>
-                                <li>Không gian: Riêng tư, tinh tế.</li>
+                                <li>Menu: Sashimi tươi, Sushi Roll nghệ thuật, Món nướng than hoa.</li>
+                                <li>Vibe: Tinh tế, Zen, riêng tư.</li>
+                            </ul>
+                        </div>
+                    </div>
+                     <div class="res-item">
+                        <button class="res-toggle" onclick="toggleRes('g-res-3')">
+                            <span>🍸 Rooftop & Chill (Open Air)</span> <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="g-res-3" class="res-detail">
+                            <ul>
+                                <li>Menu: Tapas, Cocktail, Món Âu hiện đại.</li>
+                                <li>Vibe: Gió trời, ngắm City line về đêm.</li>
                             </ul>
                         </div>
                     </div>
@@ -404,7 +446,7 @@
                 <div class="modal-h3">The Routine (4 Tiếng)</div>
                 <div class="timeline-item"><span class="time">18:00</span><span class="activity">Xe đón Chàng & Nàng. Tặng hoa tươi (nếu đặt trước).</span></div>
                 <div class="timeline-item"><span class="time">18:30</span><span class="activity">Thưởng thức <b>Rượu Vang nho Ninh Thuận</b> nồng nàn trên đường đi.</span></div>
-                <div class="timeline-item"><span class="time">19:00</span><span class="activity">Check-in nhà hàng. Thưởng thức Set Menu 5 món.</span></div>
+                <div class="timeline-item"><span class="time">19:00</span><span class="activity">Check-in nhà hàng. Thưởng thức Tasting Menu.</span></div>
                 <div class="timeline-item"><span class="time">21:00</span><span class="activity">Xe đón đi hóng gió đêm hoặc đưa về tận nơi.</span></div>
             </div>
         </div>
@@ -414,21 +456,54 @@
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal('modal-special')">&times;</button>
             <div class="modal-title">The Anniversary</div>
-            <div class="modal-subtitle">"Khoảnh khắc khắc cốt ghi tâm"</div>
+            <div class="modal-subtitle">"Dấu ấn độc bản & Sự xa xỉ riêng tư"</div>
             <div class="modal-section">
                 <div class="modal-h3">The Concept</div>
-                <p class="modal-text">Dành cho những dịp trọng đại: Cầu hôn, Kỷ niệm ngày cưới. LoveRoute sẽ biến chiếc xe thành một không gian bất ngờ với hoa và quà ở cốp sau, cùng bữa tối VIP đẳng cấp nhất.</p>
+                <p class="modal-text">Không chỉ là một bữa tối, đây là một buổi trình diễn của cảm xúc. Dành cho những dịp trọng đại nhất: Cầu hôn, Kỷ niệm ngày cưới. Mọi chi tiết đều được cá nhân hóa ở mức cao nhất.</p>
             </div>
+            
+            <div class="modal-section">
+                <div class="modal-h3">The Exclusivity (Chọn không gian VIP)</div>
+                <p class="modal-text" style="font-style: italic; font-size: 0.85rem; margin-bottom: 10px;">
+                    *Không gian độc quyền chỉ dành cho khách Loveroutes:
+                </p>
+                <div class="restaurant-list">
+                    <div class="res-item">
+                        <button class="res-toggle" onclick="toggleRes('a-res-1')">
+                            <span>🛥️ Private Riverfront (View Sông)</span> <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="a-res-1" class="res-detail">
+                            <ul>
+                                <li>Đặc quyền: Bàn sát bờ sông/Du thuyền, setup hoa nến lộng lẫy.</li>
+                                <li>Menu: Chef's Signature Menu (Hải sản cao cấp/Bò Wagyu).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="res-item">
+                        <button class="res-toggle" onclick="toggleRes('a-res-2')">
+                            <span>🌌 Sky Dining (Tầng cao)</span> <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div id="a-res-2" class="res-detail">
+                            <ul>
+                                <li>Đặc quyền: Khu vực Private, ngắm toàn cảnh Sài Gòn.</li>
+                                <li>Menu: Fine Dining Âu Châu thượng hạng.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="modal-section">
                 <div class="modal-h3">The Routine (5 Tiếng)</div>
                 <div class="timeline-item"><span class="time">Chiều</span><span class="activity">Team Setup bí mật trang trí cốp xe (Hoa & LED).</span></div>
-                <div class="timeline-item"><span class="time">18:00</span><span class="activity">Đón cặp đôi đi ăn tối (Menu Premium VIP).</span></div>
+                <div class="timeline-item"><span class="time">18:00</span><span class="activity">Xe VIP đón cặp đôi. Thưởng thức Vang Nho & Nhạc lãng mạn.</span></div>
+                <div class="timeline-item"><span class="time">19:00</span><span class="activity">Dùng bữa tối tại bàn VIP (Đã setup đặc biệt).</span></div>
                 <div class="timeline-item"><span class="time">20:30</span><span class="activity"><b>SURPRISE MOMENT:</b> Dừng xe tại điểm view đẹp, mở cốp -> Trao quà.</span></div>
                 <div class="timeline-item"><span class="time">21:00</span><span class="activity">Media quay video/chụp ảnh khoảnh khắc hạnh phúc.</span></div>
             </div>
             <div class="modal-section">
                 <div class="modal-h3">Inclusions</div>
-                <p class="modal-text">✦ Tặng 01 chai Rượu Vang nho Ninh Thuận (Signature) mang về.<br>✦ Bữa tối Premium đã bao gồm.<br>✦ Media chuyên nghiệp đi cùng.</p>
+                <p class="modal-text">✦ Tặng 01 chai Rượu Vang nho Ninh Thuận (Signature) mang về.<br>✦ Bữa tối Đẳng cấp (Menu cao nhất).<br>✦ Media chuyên nghiệp đi cùng.</p>
             </div>
         </div>
     </div>
@@ -506,12 +581,14 @@
         }
         window.addEventListener('resize', initStars); initStars(); drawStars();
 
-        // 5. LOGIC DANH SÁCH NHÀ HÀNG (ACCORDION)
+        // 5. LOGIC DANH SÁCH NHÀ HÀNG (ACCORDION) - FIX CHO TẤT CẢ GÓI
         function toggleRes(id) {
+            // Đóng tất cả các menu khác (để gọn màn hình)
             const allDetails = document.querySelectorAll('.res-detail');
             allDetails.forEach(el => {
                 if(el.id !== id) el.classList.remove('open');
             });
+            // Mở cái hiện tại
             const element = document.getElementById(id);
             element.classList.toggle('open');
         }
